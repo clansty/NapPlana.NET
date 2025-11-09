@@ -13,7 +13,7 @@ public class MessageConverter : JsonConverter<object>
             case JsonTokenType.String:
                 return reader.GetString() ?? string.Empty;
             case JsonTokenType.StartArray:
-                var array = JsonSerializer.Deserialize<Message[]>(ref reader, options);
+                var array = JsonSerializer.Deserialize<MessageBase[]>(ref reader, options);
                 return array ?? Array.Empty<object>();
             default:
                 throw new JsonException($"Unexpected token type: {reader.TokenType}");

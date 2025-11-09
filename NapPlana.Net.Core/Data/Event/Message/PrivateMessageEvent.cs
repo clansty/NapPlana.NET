@@ -2,7 +2,7 @@
 
 namespace NapPlana.Core.Data.Event.Message;
 
-public class PrivateSender
+public class FriendSender
 {
     [JsonPropertyName("user_id")]
     public long UserId { get; set; }
@@ -26,5 +26,12 @@ public class PrivateMessageEvent : MessageEventBase
     public PrivateMessageSubType SubType { get; set; }
 
     [JsonPropertyName("sender")]
-    public PrivateSender Sender { get; set; } = new();
+    public FriendSender Sender { get; set; } = new();
+    
+    /// <summary>
+    /// 其实我不知道要怎么判断临时会话，不过这玩意似乎在其他情况的私聊发送里没有出现过
+    /// 用就完了，不对再换
+    /// </summary>
+    [JsonPropertyName("temp_source")]
+    public int? TempFlag { get; set; }
 }

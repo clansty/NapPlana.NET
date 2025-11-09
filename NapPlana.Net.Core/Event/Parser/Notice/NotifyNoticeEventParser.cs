@@ -34,14 +34,14 @@ public class NotifyNoticeEventParser: NoticeEventParser
                 if (root.TryGetProperty("group_id", out _))
                 {
                     var groupPoke = JsonSerializer.Deserialize<GroupPokeNoticeEvent>(botEvent);
-                    if (groupPoke == null) throw new UnSupportFeatureException("群戳一戳事件反序列化失败");
-                    BotEventHandler.LogReceived(LogLevel.Info, $"群{groupPoke.GroupId} 戳一戳: 用户 {groupPoke.UserId} -> 目标 {groupPoke.TargetId}");
+                    if (groupPoke == null) throw new UnSupportFeatureException("群戳一戳事件反序列化失败"); 
+                    BotEventHandler.GroupPokeNoticeReceived(groupPoke);
                 }
                 else
                 {
                     var friendPoke = JsonSerializer.Deserialize<FriendPokeNoticeEvent>(botEvent);
                     if (friendPoke == null) throw new UnSupportFeatureException("好友戳一戳事件反序列化失败");
-                    BotEventHandler.LogReceived(LogLevel.Info, $"好友戳一戳: 用户 {friendPoke.UserId} -> 目标 {friendPoke.TargetId}");
+                    BotEventHandler.FriendPokeNoticeReceived(friendPoke);
                 }
                 break;
             }
@@ -49,28 +49,28 @@ public class NotifyNoticeEventParser: NoticeEventParser
             {
                 var profileLike = JsonSerializer.Deserialize<ProfileLikeNoticeEvent>(botEvent);
                 if (profileLike == null) throw new UnSupportFeatureException("资料点赞事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"资料点赞: 操作者 {profileLike.OperatorId} 次数 {profileLike.Times}");
+                BotEventHandler.ProfileLikeNoticeReceived(profileLike);
                 break;
             }
             case "input_status":
             {
                 var inputStatus = JsonSerializer.Deserialize<InputStatusNoticeEvent>(botEvent);
                 if (inputStatus == null) throw new UnSupportFeatureException("输入状态事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"输入状态: 用户 {inputStatus.UserId} 状态 {inputStatus.StatusText} 事件类型 {inputStatus.InputEventType}");
+                BotEventHandler.InputStatusNoticeReceived(inputStatus);
                 break;
             }
             case "group_name":
             {
                 var groupName = JsonSerializer.Deserialize<GroupNameEvent>(botEvent);
                 if (groupName == null) throw new UnSupportFeatureException("群名变更事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{groupName.GroupId} 名称变更为 {groupName.NewName}");
+                BotEventHandler.LogReceived(LogLevel.Info, $"群{groupName.GroupId} 新名称 {groupName.NewName}");
                 break;
             }
             case "title":
             {
                 var groupTitle = JsonSerializer.Deserialize<GroupTitleEvent>(botEvent);
-                if (groupTitle == null) throw new UnSupportFeatureException("群头衔变更事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{groupTitle.GroupId} 新头衔 {groupTitle.Title}");
+                if (groupTitle == null) throw new UnSupportFeatureException("群头衔变更事件反序列化失败"); 
+                BotEventHandler.GroupTitleNoticeReceived(groupTitle);
                 break;
             }
             default:

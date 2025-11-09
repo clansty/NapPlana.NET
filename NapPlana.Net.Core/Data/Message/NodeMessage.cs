@@ -13,9 +13,8 @@ public class NodeMessageData : MessageDataBase
     [JsonPropertyName("content")] public List<MessageDataBase>? Content { get; set; }
 }
 
-public class NodeMessage : Message
+public class NodeMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.Node;
-    public override MessageDataBase MessageData { get; set;} = new NodeMessageData();
+    [JsonPropertyName("data")] public override MessageDataBase MessageData { get; set;} = new NodeMessageData();
 }
-

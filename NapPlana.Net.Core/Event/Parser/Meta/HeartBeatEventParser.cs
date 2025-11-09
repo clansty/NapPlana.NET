@@ -16,5 +16,6 @@ public class HeartBeatEventParser:MetaEventParser
         }
         
         BotEventHandler.LogReceived(LogLevel.Debug,$"收到心跳包，时间戳{heartBeatEvent.TimeStamp}");
+        BotEventHandler.BotHeartbeat(heartBeatEvent);
     }
 }

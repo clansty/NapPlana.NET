@@ -23,7 +23,7 @@ public class FriendNoticeEventParser: NoticeEventParser
                 var addEvent = JsonSerializer.Deserialize<FriendAddNoticeEvent>(botEvent);
                 if (addEvent == null)
                     throw new UnSupportFeatureException("好友添加事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"收到好友添加通知: 用户 {addEvent.UserId}");
+                BotEventHandler.FriendAddNoticeReceived(addEvent);
                 break;
             }
             case NoticeType.FriendRecall:
@@ -31,7 +31,7 @@ public class FriendNoticeEventParser: NoticeEventParser
                 var recallEvent = JsonSerializer.Deserialize<FriendRecallNoticeEvent>(botEvent);
                 if (recallEvent == null)
                     throw new UnSupportFeatureException("好友消息撤回事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"收到好友消息撤回通知: 用户 {recallEvent.UserId} 消息ID {recallEvent.MessageId}");
+                BotEventHandler.FriendRecallNoticeReceived(recallEvent);
                 break;
             }
             default:

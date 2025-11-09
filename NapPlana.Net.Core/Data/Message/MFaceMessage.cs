@@ -8,11 +8,12 @@ public class MFaceMessageData : MessageDataBase
     [JsonPropertyName("emoji_package_id")] public string EmojiPackageId { get; set; } = string.Empty;
     [JsonPropertyName("key")] public string Key { get; set; } = string.Empty;
     [JsonPropertyName("summary")] public string? Summary { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("id")] public string Id { get; set; } = string.Empty;
 }
 
-public class MFaceMessage : Message
+public class MFaceMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.MFace;
-    public override MessageDataBase MessageData { get; set;} = new MFaceMessageData();
+    [JsonPropertyName("data")] public override MessageDataBase MessageData { get; set;} = new MFaceMessageData();
 }
-

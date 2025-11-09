@@ -8,8 +8,8 @@ public class TextMessageData: MessageDataBase
     public String Text { get; set; } = String.Empty;
 }
 
-public class TextMessage : Message
+public class TextMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.Text;
-    public override MessageDataBase MessageData { get;set; } = new TextMessageData();
+    [JsonPropertyName("data")] public override MessageDataBase MessageData { get;set; } = new TextMessageData();
 }

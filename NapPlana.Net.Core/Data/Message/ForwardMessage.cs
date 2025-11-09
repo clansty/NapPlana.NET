@@ -9,9 +9,8 @@ public class ForwardMessageData : MessageDataBase
     [JsonPropertyName("content")] public List<object>? Content { get; set; }
 }
 
-public class ForwardMessage : Message
+public class ForwardMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.Forward;
-    public override MessageDataBase MessageData { get;set; } = new ForwardMessageData();
+    [JsonPropertyName("data")] public override MessageDataBase MessageData { get;set; } = new ForwardMessageData();
 }
-

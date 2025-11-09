@@ -20,9 +20,8 @@ public class ImageMessageData : MessageDataBase
     [JsonPropertyName("file_unique")] public string? FileUnique { get; set; }
 }
 
-public class ImageMessage : Message
+public class ImageMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.Image;
-    public override MessageDataBase MessageData { get;set; } = new ImageMessageData();
+    [JsonPropertyName("data")] public override MessageDataBase MessageData { get;set; } = new ImageMessageData();
 }
-

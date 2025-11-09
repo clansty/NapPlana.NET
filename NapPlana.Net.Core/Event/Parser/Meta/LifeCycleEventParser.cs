@@ -14,7 +14,7 @@ public class LifeCycleEventParser: MetaEventParser
         {
             throw new Exception("无法解析该事件数据，可能不是OneBot生命周期事件格式");
         }
-
+        BotEventHandler.BotLifeCycle(lifeCycleEvent);
         switch (lifeCycleEvent.SubType)
         {
             case LifeCycleSubType.Connect:

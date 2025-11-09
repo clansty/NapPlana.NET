@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using NapPlana.Core.Data.Message;
 using NapPlana.Core.Utilities;
 
 namespace NapPlana.Core.Data.Event.Message;
@@ -15,8 +16,11 @@ public class MessageEventBase : OneBotEvent
     public long UserId { get; set; }
 
     [JsonPropertyName("message")]
-    [JsonConverter(typeof(MessageConverter))]
-    public object Message { get; set; } = null!;
+    [JsonConverter(typeof(MessageListConverter))]
+    public List<MessageBase> Messages { get; set; } = null!;
+    
+    [JsonPropertyName("message_format")]
+    public string MessageFormat { get; set; } = "array";
 
     [JsonPropertyName("raw_message")]
     public string RawMessage { get; set; } = string.Empty;

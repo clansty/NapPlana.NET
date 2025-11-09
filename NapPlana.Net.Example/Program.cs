@@ -1,7 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System.Threading;
-using NapPlana.Core.Bot;
+﻿using NapPlana.Core.Bot;
 using NapPlana.Core.Data;
 using NapPlana.Core.Event.Handler;
 

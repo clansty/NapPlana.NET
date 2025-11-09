@@ -22,35 +22,74 @@ public class GroupNoticeEventParser: NoticeEventParser
             {
                 var recallEvent = JsonSerializer.Deserialize<GroupRecallNoticeEvent>(botEvent);
                 if (recallEvent == null) throw new UnSupportFeatureException("群消息撤回事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{recallEvent.GroupId} 消息撤回: 操作者 {recallEvent.OperatorId} 消息ID {recallEvent.MessageId}");
+                BotEventHandler.GroupRecallNoticeReceived(recallEvent);
                 break;
             }
             case NoticeType.GroupIncrease:
             {
                 var increaseEvent = JsonSerializer.Deserialize<GroupIncreaseNoticeEvent>(botEvent);
                 if (increaseEvent == null) throw new UnSupportFeatureException("群成员增加事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{increaseEvent.GroupId} 成员增加: 用户 {increaseEvent.UserId} 操作类型 {increaseEvent.IncreaseType}");
+                BotEventHandler.GroupIncreaseNoticeReceived(increaseEvent);
+                switch (increaseEvent.IncreaseType)
+                {
+                    case GroupIncreaseType.Approve:
+                        BotEventHandler.GroupIncreaseApproveNoticeReceived(increaseEvent);
+                        break;
+                    case GroupIncreaseType.Invite:
+                        BotEventHandler.GroupIncreaseInviteNoticeReceived(increaseEvent);
+                        break;
+                }
                 break;
             }
             case NoticeType.GroupDecrease:
             {
                 var decreaseEvent = JsonSerializer.Deserialize<GroupDecreaseNoticeEvent>(botEvent);
                 if (decreaseEvent == null) throw new UnSupportFeatureException("群成员减少事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{decreaseEvent.GroupId} 成员减少: 用户 {decreaseEvent.UserId} 操作类型 {decreaseEvent.DecreaseType}");
+                BotEventHandler.GroupDecreaseNoticeReceived(decreaseEvent);
+                switch (decreaseEvent.DecreaseType)
+                {
+                    case GroupDecreaseType.Leave:
+                        BotEventHandler.GroupDecreaseLeaveNoticeReceived(decreaseEvent);
+                        break;
+                    case GroupDecreaseType.Kick:
+                        BotEventHandler.GroupDecreaseKickNoticeReceived(decreaseEvent);
+                        break;
+                    case GroupDecreaseType.KickMe:
+                        BotEventHandler.GroupDecreaseKickMeNoticeReceived(decreaseEvent);
+                        break;
+                }
                 break;
             }
             case NoticeType.GroupAdmin:
             {
                 var adminEvent = JsonSerializer.Deserialize<GroupAdminNoticeEvent>(botEvent);
                 if (adminEvent == null) throw new UnSupportFeatureException("群管理员变更事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{adminEvent.GroupId} 管理员变更: 用户 {adminEvent.UserId} 操作类型 {adminEvent.AdminType}");
+                BotEventHandler.GroupAdminNoticeReceived(adminEvent);
+                switch (adminEvent.AdminType)
+                {
+                    case GroupManagerType.Set:
+                        BotEventHandler.GroupAdminSetNoticeReceived(adminEvent);
+                        break;
+                    case GroupManagerType.Unset:
+                        BotEventHandler.GroupAdminUnsetNoticeReceived(adminEvent);
+                        break;
+                }
                 break;
             }
             case NoticeType.GroupBan:
             {
                 var banEvent = JsonSerializer.Deserialize<GroupBanNoticeEvent>(botEvent);
                 if (banEvent == null) throw new UnSupportFeatureException("群禁言事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{banEvent.GroupId} 禁言: 用户 {banEvent.UserId} 操作者 {banEvent.OperatorId} 禁言时长 {banEvent.Duration}s 类型 {banEvent.BanType}");
+                BotEventHandler.GroupBanNoticeReceived(banEvent);
+                switch (banEvent.BanType)
+                {
+                    case GroupBanType.Ban:
+                        BotEventHandler.GroupBanSetNoticeReceived(banEvent);
+                        break;
+                    case GroupBanType.LiftBan:
+                        BotEventHandler.GroupBanLiftNoticeReceived(banEvent);
+                        break;
+                }
                 break;
             }
             case NoticeType.GroupUpload:
@@ -64,21 +103,30 @@ public class GroupNoticeEventParser: NoticeEventParser
             {
                 var cardEvent = JsonSerializer.Deserialize<GroupCardEvent>(botEvent);
                 if (cardEvent == null) throw new UnSupportFeatureException("群名片变更事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{cardEvent.GroupId} 名片变更: 用户 {cardEvent.UserId} {cardEvent.OldCard} -> {cardEvent.NewCard}");
+                BotEventHandler.GroupCardNoticeReceived(cardEvent);
                 break;
             }
             case NoticeType.Essence:
             {
                 var essenceEvent = JsonSerializer.Deserialize<GroupEssenceNoticeEvent>(botEvent);
                 if (essenceEvent == null) throw new UnSupportFeatureException("群精华消息事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{essenceEvent.GroupId} 精华消息: 消息ID {essenceEvent.MessageId} 操作类型 {essenceEvent.EssenceType} 操作者 {essenceEvent.OperatorId}");
+                BotEventHandler.GroupEssenceNoticeReceived(essenceEvent);
+                switch (essenceEvent.EssenceType)
+                {
+                    case GroupEssenceType.Add:
+                        BotEventHandler.GroupEssenceAddNoticeReceived(essenceEvent);
+                        break;
+                    case GroupEssenceType.Delete:
+                        BotEventHandler.GroupEssenceDeleteNoticeReceived(essenceEvent);
+                        break;
+                }
                 break;
             }
             case NoticeType.GroupMsgEmojiLike:
             {
                 var likeEvent = JsonSerializer.Deserialize<GroupMsgEmojiLikeNoticeEvent>(botEvent);
                 if (likeEvent == null) throw new UnSupportFeatureException("群消息表情回应事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{likeEvent.GroupId} 消息{likeEvent.MessageId} 表情点赞: 共 {likeEvent.Likes.Count} 种表情");
+                BotEventHandler.GroupMsgEmojiLikeNoticeReceived(likeEvent);
                 break;
             }
             default:

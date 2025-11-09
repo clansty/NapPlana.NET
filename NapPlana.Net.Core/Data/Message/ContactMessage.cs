@@ -9,9 +9,8 @@ public class ContactMessageData : MessageDataBase
     [JsonPropertyName("id")] public string Id { get; set; } = string.Empty;
 }
 
-public class ContactMessage : Message
+public class ContactMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.Contact;
-    public override MessageDataBase MessageData { get;set; } = new ContactMessageData();
+    [JsonPropertyName("data")] public override MessageDataBase MessageData { get;set; } = new ContactMessageData();
 }
-

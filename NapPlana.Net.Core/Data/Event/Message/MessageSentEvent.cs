@@ -12,4 +12,7 @@ public class MessageSentEvent : MessageEventBase
 
     [JsonPropertyName("target_id")]
     public long TargetId { get; set; }
+    
+    //MessageSent不需要sender
+    
 }
