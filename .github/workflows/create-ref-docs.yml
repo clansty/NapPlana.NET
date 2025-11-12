@@ -1,0 +1,97 @@
+﻿name: Create Reference Docs
+
+on:
+  push:
+    tags:
+      - '**'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    name: Generate and deploy Doxygen docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository (with LFS)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Ensure tag is on 'master' branch
+        id: tag_check
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" != "tag" ]]; then
+            echo "on_master=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          TAG_REF="${GITHUB_REF}"
+          TAG_NAME="${TAG_REF#refs/tags/}"
+          TAG_COMMIT="$(git rev-list -n 1 "$TAG_REF")"
+
+          echo "Tag ${TAG_NAME} -> ${TAG_COMMIT}"
+
+          git fetch --no-tags origin master:origin/master
+          if git merge-base --is-ancestor "${TAG_COMMIT}" "origin/master"; then
+            echo "on_master=true" >> $GITHUB_OUTPUT
+            echo "tag_name=${TAG_NAME}" >> $GITHUB_OUTPUT
+            echo "tag_commit=${TAG_COMMIT}" >> $GITHUB_OUTPUT
+          else
+            echo "on_master=false" >> $GITHUB_OUTPUT
+            echo "Tag commit is not contained in 'master' branch. Skipping deployment."
+          fi
+
+      - name: Stop if tag is not on master branch
+        if: steps.tag_check.outputs.on_master != 'true'
+        run: echo "No deployment: tag not on master branch."
+
+      - name: Install Doxygen and Graphviz
+        if: steps.tag_check.outputs.on_master == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+
+      - name: Fill tag version into Doxyfile
+        if: steps.tag_check.outputs.on_master == 'true'
+        run: |
+          TAG="${{ steps.tag_check.outputs.tag_name }}"
+          # Escape sed replacement sensitive chars (/ and &)
+          ESCAPED_TAG=$(printf '%s' "$TAG" | sed -e 's/[\/&]/\\&/g')
+          sed -i "s/{{package_version}}/${ESCAPED_TAG}/g" api-doc/Doxyfile
+          echo "Injected version '${TAG}' into Doxyfile"
+
+      - name: Build Doxygen documentation
+        if: steps.tag_check.outputs.on_master == 'true'
+        run: |
+          set -e
+          doxygen api-doc/Doxyfile || { echo 'Doxygen generation failed'; exit 1; }
+          if [ ! -d api-doc/html ]; then
+            echo 'Expected output directory api-doc/html not found'; exit 2; fi
+          echo 'Doxygen docs generated successfully.'
+
+      - name: Configure GitHub Pages
+        if: steps.tag_check.outputs.on_master == 'true'
+        uses: actions/configure-pages@v4
+
+      - name: Upload Pages artifact
+        if: steps.tag_check.outputs.on_master == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: api-doc/html
+
+      - name: Deploy to GitHub Pages
+        if: steps.tag_check.outputs.on_master == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
