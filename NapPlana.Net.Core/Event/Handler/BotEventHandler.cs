@@ -5,6 +5,9 @@ using NapPlana.Core.Data.Event.Notice; // 新增: Notice事件数据
 
 namespace NapPlana.Core.Event.Handler;
 
+/// <summary>
+/// 机器人事件处理器
+/// </summary>
 public static class BotEventHandler
 {
     /// <summary>
