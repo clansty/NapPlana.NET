@@ -53,7 +53,7 @@ jobs:
 
       - name: Stop if tag is not on master branch
         if: steps.tag_check.outputs.on_master != 'true'
-        run: echo "No deployment: tag not on master branch."
+        run: echo "No deployment tag not on master branch."
 
       - name: Install Doxygen and Graphviz
         if: steps.tag_check.outputs.on_master == 'true'
