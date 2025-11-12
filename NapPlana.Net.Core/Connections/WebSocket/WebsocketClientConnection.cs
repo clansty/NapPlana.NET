@@ -10,15 +10,26 @@ using LogLevel = NapPlana.Core.Data.LogLevel;
 
 namespace NapPlana.Core.Connections.WebSocket;
 
+/// <summary>
+/// WebSocket客户端连接
+/// </summary>
 public class WebsocketClientConnection: ConnectionBase
 {
     private WebSocketClient? _client;
     
+    /// <summary>
+    /// 初始化
+    /// </summary>
     public WebsocketClientConnection()
     {
         ConnectionType = BotConnectionType.WebSocketClient;
     }
-    
+    /// <summary>
+    /// 带参初始化
+    /// </summary>
+    /// <param name="ip">IP</param>
+    /// <param name="port">端口</param>
+    /// <param name="token">可空的令牌</param>
     public WebsocketClientConnection(string ip, int port, string? token = null)
         : this()
     {
@@ -27,6 +38,9 @@ public class WebsocketClientConnection: ConnectionBase
         this.Token = token;
     }
 
+    /// <summary>
+    /// 初始化连接
+    /// </summary>
     public override async Task InitializeAsync()
     {
         if (_client != null)
@@ -59,7 +73,10 @@ public class WebsocketClientConnection: ConnectionBase
             throw;
         }
     }
-
+    
+    /// <summary>
+    /// 关闭连接
+    /// </summary>
     public override async Task ShutdownAsync()
     {
         if (_client == null)
@@ -81,7 +98,11 @@ public class WebsocketClientConnection: ConnectionBase
             _client = null;
         }
     }
-
+    
+    /// <summary>
+    /// 发送原始消息
+    /// </summary>
+    /// <param name="message">消息json</param>
     public override async Task SendMessageAsync(string message)
     {
         if (_client == null)
@@ -100,6 +121,12 @@ public class WebsocketClientConnection: ConnectionBase
         }
     }
 
+    /// <summary>
+    /// 发送消息
+    /// </summary>
+    /// <param name="actionType">操作</param>
+    /// <param name="message">消息内容</param>
+    /// <param name="echo">标识符</param>
     public override async Task SendMessageAsync(ApiActionType actionType,object message,string echo)
     {
         if (_client == null)

@@ -2,12 +2,20 @@
 
 namespace NapPlana.Core.Data.Message;
 
+/// <summary>
+/// 石头剪刀布消息数据。
+/// </summary>
 public class RpsMessageData : MessageDataBase
 {
-    // Receive only: result (e.g., rock/paper/scissors outcome)
+    /// <summary>
+    /// 结果。
+    /// </summary>
     [JsonPropertyName("result")] public string? Result { get; set; }
 }
 
+/// <summary>
+/// 石头剪刀布消息。
+/// </summary>
 public class RpsMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.Rps;

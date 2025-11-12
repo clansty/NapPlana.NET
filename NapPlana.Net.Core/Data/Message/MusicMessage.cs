@@ -2,22 +2,44 @@
 
 namespace NapPlana.Core.Data.Message;
 
+/// <summary>
+/// 音乐消息数据。
+/// </summary>
 public class MusicMessageData : MessageDataBase
 {
-    // Type: qq / 163 / kugou / migu / kuwo / custom
+    /// <summary>
+    /// 类型。
+    /// </summary>
     [JsonPropertyName("type")] public string Type { get; set; } = string.Empty;
-
-    // For existing music sources
+    /// <summary>
+    /// ID。
+    /// </summary>
     [JsonPropertyName("id")] public string? Id { get; set; }
-
-    // For custom music
+    /// <summary>
+    /// URL。
+    /// </summary>
     [JsonPropertyName("url")] public string? Url { get; set; }
+    /// <summary>
+    /// 音频。
+    /// </summary>
     [JsonPropertyName("audio")] public string? Audio { get; set; }
+    /// <summary>
+    /// 标题。
+    /// </summary>
     [JsonPropertyName("title")] public string? Title { get; set; }
+    /// <summary>
+    /// 图片。
+    /// </summary>
     [JsonPropertyName("image")] public string? Image { get; set; }
+    /// <summary>
+    /// 歌手。
+    /// </summary>
     [JsonPropertyName("singer")] public string? Singer { get; set; }
 }
 
+/// <summary>
+/// 音乐消息。
+/// </summary>
 public class MusicMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.Music;

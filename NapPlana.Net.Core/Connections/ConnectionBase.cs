@@ -2,6 +2,9 @@
 
 namespace NapPlana.Core.Connections;
 
+/// <summary>
+/// 基本连接类
+/// </summary>
 public class ConnectionBase: IConnectionBase
 {
     protected string Ip = "";
@@ -34,6 +37,12 @@ public class ConnectionBase: IConnectionBase
         await Task.CompletedTask;
     }
     
+    /// <summary>
+    /// 带参发送消息时调用
+    /// </summary>
+    /// <param name="actionType">操作类型</param>
+    /// <param name="message">消息内容</param>
+    /// <param name="echo">标识</param>
     public virtual async Task SendMessageAsync(ApiActionType actionType,object message,string echo)
     {
         await Task.CompletedTask;

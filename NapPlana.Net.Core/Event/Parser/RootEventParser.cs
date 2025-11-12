@@ -9,10 +9,15 @@ using NapPlana.Core.Event.Parser.Message;
 namespace NapPlana.Core.Event.Parser;
 
 /// <summary>
-/// 检查数据是否为OneBotEvent
+/// 基础事件解析器：识别 OneBot 顶层 <c>post_type</c> 并分发到具体子解析器（Meta / Message / MessageSent / Notice）。
 /// </summary>
 public class RootEventParser: IEventParser
 {
+    /// <summary>
+    /// 解析顶层事件 JSON，判断 <c>post_type</c> 并路由到对应解析器；不支持或 None 类型直接返回。
+    /// </summary>
+    /// <param name="jsonEventData">原始 OneBot 事件 JSON 字符串</param>
+    /// <exception cref="UnSupportFeatureException">反序列化失败或非 OneBot 顶层事件格式</exception>
     public virtual void ParseEvent(string jsonEventData)
     {
         var oneBotEvent = JsonSerializer.Deserialize<OneBotEvent>(jsonEventData);

@@ -6,8 +6,16 @@ using NapPlana.Core.Exceptions;
 
 namespace NapPlana.Core.Event.Parser.Message;
 
+/// <summary>
+/// 检查并解析OneBot群消息事件
+/// </summary>
 public class GroupMessageEventParser: MessageEventParser
 {
+    /// <summary>
+    /// 解析事件是否为Group消息事件
+    /// </summary>
+    /// <param name="jsonEventData">数据</param>
+    /// <exception cref="UnSupportFeatureException">不是Group消息事件</exception>
     public override void ParseEvent(string jsonEventData)
     {
         var ev = JsonSerializer.Deserialize<GroupMessageEvent>(jsonEventData);

@@ -5,8 +5,16 @@ using NapPlana.Core.Exceptions;
 
 namespace NapPlana.Core.Event.Parser.Notice;
 
+/// <summary>
+/// 通知事件解析器，负责识别并分发 OneBot 通知事件到更细分的解析器（好友、群、notify、离线等）。
+/// </summary>
 public class NoticeEventParser: RootEventParser
 {
+    /// <summary>
+    /// 解析通知事件 JSON 并根据 <c>notice_type</c> 分发到对应的子解析器。
+    /// </summary>
+    /// <param name="botEvent">原始 OneBot 通知事件 JSON 字符串</param>
+    /// <exception cref="UnSupportFeatureException">反序列化失败或不是通知事件格式</exception>
     public override void ParseEvent(string botEvent)
     {
         var noticeEvent = JsonSerializer.Deserialize<NoticeEventBase>(botEvent);

@@ -10,10 +10,19 @@ using NapPlana.Core.API;
 
 namespace NapPlana.Core.Connections.Plugins;
 
+/// <summary>
+/// TouchSocket WebSocket消息接收插件
+/// </summary>
 public class WebSocketMessageReceiverPlugin: PluginBase, IWebSocketReceivedPlugin
 {
     private readonly RootEventParser _parser = new();
 
+    /// <summary>
+    /// 当接收到WebSocket消息时触发
+    /// </summary>
+    /// <param name="webSocket">ws接口</param>
+    /// <param name="e">参数</param>
+    /// <returns></returns>
     public Task OnWebSocketReceived(IWebSocket webSocket, WSDataFrameEventArgs e)
     {
         var text = e.DataFrame.ToText();
@@ -52,6 +61,10 @@ public class WebSocketMessageReceiverPlugin: PluginBase, IWebSocketReceivedPlugi
     }
 }
 
+/// <summary>
+/// TouchSocket WebSocket认证插件
+/// </summary>
+/// <param name="token">令牌，没有可不传</param>
 public class WebSocketAuthPlugin(string? token) : PluginBase, IWebSocketConnectingPlugin
 {
     public Task OnWebSocketConnecting(IWebSocket webSocket, HttpContextEventArgs e)

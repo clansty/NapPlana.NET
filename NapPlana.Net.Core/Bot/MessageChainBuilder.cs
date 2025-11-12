@@ -5,8 +5,15 @@ using System.IO; // added for FileStream/MemoryStream
 
 namespace NapPlana.Core.Bot;
 
+/// <summary>
+/// 消息链构筑器
+/// </summary>
 public class MessageChainBuilder
 {
+    /// <summary>
+    /// 创建消息链构筑器
+    /// </summary>
+    /// <returns>构筑器实例</returns>
     public static MessageChainBuilder Create()  => new MessageChainBuilder();
     
     private List<MessageBase> _messages = new List<MessageBase>();
@@ -36,7 +43,7 @@ public class MessageChainBuilder
     /// </summary>
     /// <param name="userId">qq号</param>
     /// <param name="isAll">是否at全体</param>
-    /// <returns></returns>
+    /// <returns>自身</returns>
     public MessageChainBuilder AddMentionMessage(string userId,bool isAll = false)
     {
         _messages.Add(new AtMessage()
@@ -54,7 +61,7 @@ public class MessageChainBuilder
     /// 添加回复消息
     /// </summary>
     /// <param name="messageId">消息id</param>
-    /// <returns></returns>
+    /// <returns>自身</returns>
     public MessageChainBuilder AddReplyMessage(string messageId)
     {
         _messages.Add(new ReplyMessage()
@@ -73,7 +80,7 @@ public class MessageChainBuilder
     /// </summary>
     /// <param name="imageUrl">可输入服务器本地路径/网络路径/base64图片编码</param>
     /// <param name="isBase64">是否为base64，需添加 base64:// 前缀</param>
-    /// <returns></returns>
+    /// <returns>自身</returns>
     public MessageChainBuilder AddImageMessage(string imageUrl,bool isBase64 = false)
     {
         if (string.IsNullOrWhiteSpace(imageUrl)) return this;
@@ -95,7 +102,7 @@ public class MessageChainBuilder
     /// 使用文件流添加图片信息
     /// </summary>
     /// <param name="fs">文件流</param>
-    /// <returns></returns>
+    /// <returns>自身</returns>
     public MessageChainBuilder AddImageMessage(FileStream fs)
     {
         if (fs == null) throw new ArgumentNullException(nameof(fs));

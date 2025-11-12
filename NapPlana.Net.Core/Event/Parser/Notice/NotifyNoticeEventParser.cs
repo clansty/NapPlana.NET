@@ -6,8 +6,16 @@ using NapPlana.Core.Exceptions;
 
 namespace NapPlana.Core.Event.Parser.Notice;
 
+/// <summary>
+/// Notify 子类型通知事件解析器，处理戳一戳、资料点赞、输入状态、群名/头衔变更等通知。
+/// </summary>
 public class NotifyNoticeEventParser: NoticeEventParser
 {
+    /// <summary>
+    /// 解析 notify 子类型事件，基于 <c>sub_type</c> 分发到具体内部事件；非 notify 类型直接返回。
+    /// </summary>
+    /// <param name="botEvent">原始 OneBot notify 通知事件 JSON 字符串</param>
+    /// <exception cref="UnSupportFeatureException">反序列化失败或子类型反序列化失败</exception>
     public override void ParseEvent(string botEvent)
     {
         var baseEvent = JsonSerializer.Deserialize<NoticeEventBase>(botEvent);
@@ -79,4 +87,3 @@ public class NotifyNoticeEventParser: NoticeEventParser
         }
     }
 }
-

@@ -3,13 +3,787 @@ using NapPlana.Core.Utilities;
 
 namespace NapPlana.Core.Data;
 
+/// <summary>
+/// 日志级别。
+/// </summary>
 public enum LogLevel
 {
+    /// <summary>
+    /// 无。
+    /// </summary>
     None = 0,
+    /// <summary>
+    /// 错误。
+    /// </summary>
     Error = 1,
+    /// <summary>
+    /// 警告。
+    /// </summary>
     Warning = 2,
+    /// <summary>
+    /// 信息。
+    /// </summary>
     Info = 3,
+    /// <summary>
+    /// 调试。
+    /// </summary>
     Debug = 4
+}
+
+/// <summary>
+/// 生命周期子类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum LifeCycleSubType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 启用。
+    /// </summary>
+    [JsonPropertyName("enable")]
+    Enable,
+    /// <summary>
+    /// 禁用。
+    /// </summary>
+    [JsonPropertyName("disable")]
+    Disable,
+    /// <summary>
+    /// 连接。
+    /// </summary>
+    [JsonPropertyName("connect")]
+    Connect
+}
+
+/// <summary>
+/// 群成员增加类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum GroupIncreaseType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 批准。
+    /// </summary>
+    [JsonPropertyName("approve")]
+    Approve,
+    /// <summary>
+    /// 邀请。
+    /// </summary>
+    [JsonPropertyName("invite")]
+    Invite
+}
+
+/// <summary>
+/// 群成员减少类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum GroupDecreaseType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 踢出。
+    /// </summary>
+    [JsonPropertyName("kick")]
+    Kick,
+    /// <summary>
+    /// 离开。
+    /// </summary>
+    [JsonPropertyName("leave")]
+    Leave,
+    /// <summary>
+    /// 踢出我��
+    /// </summary>
+    [JsonPropertyName("kick_me")]
+    KickMe,
+    /// <summary>
+    /// 解散。
+    /// </summary>
+    [JsonPropertyName("disband")]
+    Disband
+}
+
+/// <summary>
+/// 群管理员类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum GroupManagerType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 设置。
+    /// </summary>
+    [JsonPropertyName("set")]
+    Set,
+    /// <summary>
+    /// 取消设置。
+    /// </summary>
+    [JsonPropertyName("unset")]
+    Unset
+}
+
+/// <summary>
+/// 群禁言类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum GroupBanType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 禁言。
+    /// </summary>
+    [JsonPropertyName("ban")]
+    Ban,
+    /// <summary>
+    /// 解除禁言。
+    /// </summary>
+    [JsonPropertyName("lift_ban")]
+    LiftBan
+}
+
+/// <summary>
+/// 群精华消息类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum GroupEssenceType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 添加。
+    /// </summary>
+    [JsonPropertyName("add")]
+    Add,
+    /// <summary>
+    /// 删除。
+    /// </summary>
+    [JsonPropertyName("delete")]
+    Delete
+}
+
+/// <summary>
+/// 消息类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum MessageType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 私聊。
+    /// </summary>
+    [JsonPropertyName("private")]
+    Private,
+    /// <summary>
+    /// 群聊。
+    /// </summary>
+    [JsonPropertyName("group")]
+    Group
+}
+
+/// <summary>
+/// 私信消息子类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum PrivateMessageSubType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 好友。
+    /// </summary>
+    [JsonPropertyName("friend")]
+    Friend,
+    /// <summary>
+    /// 群聊。
+    /// </summary>
+    [JsonPropertyName("group")]
+    Group,
+    /// <summary>
+    /// 其他。
+    /// </summary>
+    [JsonPropertyName("other")]
+    Other
+}
+
+/// <summary>
+/// 性别类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum SexType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 男。
+    /// </summary>
+    [JsonPropertyName("male")]
+    Male,
+    /// <summary>
+    /// 女。
+    /// </summary>
+    [JsonPropertyName("female")]
+    Female,
+    /// <summary>
+    /// 未知。
+    /// </summary>
+    [JsonPropertyName("unknown")]
+    Unknown
+}
+
+/// <summary>
+/// 群角色。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum GroupRole
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 群主。
+    /// </summary>
+    [JsonPropertyName("owner")]
+    Owner,
+    /// <summary>
+    /// 管理员。
+    /// </summary>
+    [JsonPropertyName("admin")]
+    Admin,
+    /// <summary>
+    /// 成员。
+    /// </summary>
+    [JsonPropertyName("member")]
+    Member
+}
+
+/// <summary>
+/// 元事件类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum MetaEventType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None = -1,
+    /// <summary>
+    /// 心跳。
+    /// </summary>
+    [JsonPropertyName("heartbeat")]
+    Heartbeat = 0,
+    /// <summary>
+    /// 生命周期。
+    /// </summary>
+    [JsonPropertyName("lifecycle")]
+    Lifecycle = 1
+}
+
+/// <summary>
+/// 通知类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum NoticeType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    
+    // request-related
+    /// <summary>
+    /// 好友。
+    /// </summary>
+    [JsonPropertyName("friend")]
+    Friend,
+    /// <summary>
+    /// 群。
+    /// </summary>
+    [JsonPropertyName("group")]
+    Group,
+    
+    // friend notices
+    /// <summary>
+    /// 好友添加。
+    /// </summary>
+    [JsonPropertyName("friend_add")]
+    FriendAdd,
+    /// <summary>
+    /// 好友撤回。
+    /// </summary>
+    [JsonPropertyName("friend_recall")]
+    FriendRecall,
+    
+    // group notices
+    /// <summary>
+    /// 群撤回。
+    /// </summary>
+    [JsonPropertyName("group_recall")]
+    GroupRecall,
+    /// <summary>
+    /// 群增加。
+    /// </summary>
+    [JsonPropertyName("group_increase")]
+    GroupIncrease,
+    /// <summary>
+    /// 群减少。
+    /// </summary>
+    [JsonPropertyName("group_decrease")]
+    GroupDecrease,
+    /// <summary>
+    /// 群管理员。
+    /// </summary>
+    [JsonPropertyName("group_admin")]
+    GroupAdmin,
+    /// <summary>
+    /// 群禁言。
+    /// </summary>
+    [JsonPropertyName("group_ban")]
+    GroupBan,
+    /// <summary>
+    /// 群上传。
+    /// </summary>
+    [JsonPropertyName("group_upload")]
+    GroupUpload,
+    /// <summary>
+    /// 群名片。
+    /// </summary>
+    [JsonPropertyName("group_card")]
+    GroupCard,
+    /// <summary>
+    /// 群消息表情点赞。
+    /// </summary>
+    [JsonPropertyName("group_msg_emoji_like")]
+    GroupMsgEmojiLike,
+    /// <summary>
+    /// 精华。
+    /// </summary>
+    [JsonPropertyName("essence")]
+    Essence,
+    
+    // notify wrapper for subtypes like poke, profile_like, input_status, title, group_name
+    /// <summary>
+    /// 通知。
+    /// </summary>
+    [JsonPropertyName("notify")]
+    Notify,
+    
+    // other
+    /// <summary>
+    /// 机器人离线。
+    /// </summary>
+    [JsonPropertyName("bot_offline")]
+    BotOffline
+}
+
+/// <summary>
+/// 通知子类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum NotifySubType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 戳一戳。
+    /// </summary>
+    [JsonPropertyName("poke")]
+    Poke,
+    /// <summary>
+    /// 个人资料点赞。
+    /// </summary>
+    [JsonPropertyName("profile_like")]
+    ProfileLike,
+    /// <summary>
+    /// 输入状态。
+    /// </summary>
+    [JsonPropertyName("input_status")]
+    InputStatus,
+    /// <summary>
+    /// 头衔。
+    /// </summary>
+    [JsonPropertyName("title")]
+    Title,
+    /// <summary>
+    /// 群名称。
+    /// </summary>
+    [JsonPropertyName("group_name")]
+    GroupName
+}
+
+/// <summary>
+/// 消息数据类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum MessageDataType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 文本。
+    /// </summary>
+    [JsonPropertyName("text")]
+    Text,
+    /// <summary>
+    /// 图片。
+    /// </summary>
+    [JsonPropertyName("image")]
+    Image,
+    /// <summary>
+    /// 表情。
+    /// </summary>
+    [JsonPropertyName("face")]
+    Face,
+    /// <summary>
+    /// @。
+    /// </summary>
+    [JsonPropertyName("at")]
+    At,
+    /// <summary>
+    /// 音频。
+    /// </summary>
+    [JsonPropertyName("audio")]
+    Audio,
+    /// <summary>
+    /// 录音。
+    /// </summary>
+    [JsonPropertyName("record")]
+    Record,
+    /// <summary>
+    /// 视频。
+    /// </summary>
+    [JsonPropertyName("video")]
+    Video,
+    /// <summary>
+    /// 石头剪刀布。
+    /// </summary>
+    [JsonPropertyName("rps")]
+    Rps,
+    /// <summary>
+    /// 联系人。
+    /// </summary>
+    [JsonPropertyName("contact")]
+    Contact,
+    /// <summary>
+    /// 骰子。
+    /// </summary>
+    [JsonPropertyName("dice")]
+    Dice,
+    /// <summary>
+    /// 音乐。
+    /// </summary>
+    [JsonPropertyName("music")]
+    Music,
+    /// <summary>
+    /// 回复。
+    /// </summary>
+    [JsonPropertyName("reply")]
+    Reply,
+    /// <summary>
+    /// 转发。
+    /// </summary>
+    [JsonPropertyName("forward")]
+    Forward,
+    /// <summary>
+    /// 节点。
+    /// </summary>
+    [JsonPropertyName("node")]
+    Node,
+    /// <summary>
+    /// JSON。
+    /// </summary>
+    [JsonPropertyName("json")]
+    Json,
+    /// <summary>
+    /// MFace。
+    /// </summary>
+    [JsonPropertyName("mface")]
+    MFace,
+    /// <summary>
+    /// 文件。
+    /// </summary>
+    [JsonPropertyName("file")]
+    File
+}
+
+/// <summary>
+/// API动作类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum ApiActionType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None = -1,
+    /// <summary>
+    /// 发送私聊消息。
+    /// </summary>
+    [JsonPropertyName("send_private_msg")]
+    SendPrivateMsg = 0,
+    /// <summary>
+    /// 发送群消息。
+    /// </summary>
+    [JsonPropertyName("send_group_msg")]
+    SendGroupMsg = 1,
+    /// <summary>
+    /// 发送消息。
+    /// </summary>
+    [JsonPropertyName("send_msg")]
+    SendMsg = 2,
+
+    /// <summary>
+    /// 删除消息。
+    /// </summary>
+    [JsonPropertyName("delete_msg")]
+    DeleteMsg = 3,
+    /// <summary>
+    /// 获取消息。
+    /// </summary>
+    [JsonPropertyName("get_msg")]
+    GetMsg = 4,
+    /// <summary>
+    /// 获取转发消息。
+    /// </summary>
+    [JsonPropertyName("get_forward_msg")]
+    GetForwardMsg = 5,
+    
+    /// <summary>
+    /// 发送点赞。
+    /// </summary>
+    [JsonPropertyName("send_like")]
+    SendLike = 6,
+
+    /// <summary>
+    /// 设置群踢出。
+    /// </summary>
+    [JsonPropertyName("set_group_kick")]
+    SetGroupKick = 7,
+    /// <summary>
+    /// 设置群禁言。
+    /// </summary>
+    [JsonPropertyName("set_group_ban")]
+    SetGroupBan = 8,
+    /// <summary>
+    /// 设置群全员禁言。
+    /// </summary>
+    [JsonPropertyName("set_group_whole_ban")]
+    SetGroupWholeBan = 9,
+    /// <summary>
+    /// 设置群管理员。
+    /// </summary>
+    [JsonPropertyName("set_group_admin")]
+    SetGroupAdmin = 10,
+    /// <summary>
+    /// 设置群名片。
+    /// </summary>
+    [JsonPropertyName("set_group_card")]
+    SetGroupCard = 11,
+    /// <summary>
+    /// 设置群名称。
+    /// </summary>
+    [JsonPropertyName("set_group_name")]
+    SetGroupName = 12,
+    /// <summary>
+    /// 设置群离开。
+    /// </summary>
+    [JsonPropertyName("set_group_leave")]
+    SetGroupLeave = 13,
+    /// <summary>
+    /// 设置群���殊头衔。
+    /// </summary>
+    [JsonPropertyName("set_group_special_title")]
+    SetGroupSpecialTitle = 14,
+    /// <summary>
+    /// 设置好友添加请求。
+    /// </summary>
+    [JsonPropertyName("set_friend_add_request")]
+    SetFriendAddRequest = 15,
+    /// <summary>
+    /// 设置群添加请求。
+    /// </summary>
+    [JsonPropertyName("set_group_add_request")]
+    SetGroupAddRequest = 16,
+
+    /// <summary>
+    /// 获取登录信息。
+    /// </summary>
+    [JsonPropertyName("get_login_info")]
+    GetLoginInfo = 17,
+    /// <summary>
+    /// 获取陌生人信息。
+    /// </summary>
+    [JsonPropertyName("get_stranger_info")]
+    GetStrangerInfo = 18,
+    /// <summary>
+    /// 获取好���列表。
+    /// </summary>
+    [JsonPropertyName("get_friend_list")]
+    GetFriendList = 19,
+    /// <summary>
+    /// 获取群信息。
+    /// </summary>
+    [JsonPropertyName("get_group_info")]
+    GetGroupInfo = 20,
+    /// <summary>
+    /// 获取群列表。
+    /// </summary>
+    [JsonPropertyName("get_group_list")]
+    GetGroupList = 21,
+    /// <summary>
+    /// 获取群成员信息。
+    /// </summary>
+    [JsonPropertyName("get_group_member_info")]
+    GetGroupMemberInfo = 22,
+    /// <summary>
+    /// 获取群成员列表。
+    /// </summary>
+    [JsonPropertyName("get_group_member_list")]
+    GetGroupMemberList = 23,
+    /// <summary>
+    /// 获取群荣誉信息。
+    /// </summary>
+    [JsonPropertyName("get_group_honor_info")]
+    GetGroupHonorInfo = 24,
+    /// <summary>
+    /// 获取Cookies。
+    /// </summary>
+    [JsonPropertyName("get_cookies")]
+    GetCookies = 25,
+    /// <summary>
+    /// 获取CSRF令牌。
+    /// </summary>
+    [JsonPropertyName("get_csrf_token")]
+    GetCsrfToken = 26,
+    /// <summary>
+    /// 获取凭据。
+    /// </summary>
+    [JsonPropertyName("get_credentials")]
+    GetCredentials = 27,
+    /// <summary>
+    /// 获取录音。
+    /// </summary>
+    [JsonPropertyName("get_record")]
+    GetRecord = 28,
+    /// <summary>
+    /// 获取图片。
+    /// </summary>
+    [JsonPropertyName("get_image")]
+    GetImage = 29,
+    /// <summary>
+    /// 能否发送图片。
+    /// </summary>
+    [JsonPropertyName("can_send_image")]
+    CanSendImage = 30,
+    /// <summary>
+    /// 能否发送录音。
+    /// </summary>
+    [JsonPropertyName("can_send_record")]
+    CanSendRecord = 31,
+    /// <summary>
+    /// 获取状态。
+    /// </summary>
+    [JsonPropertyName("get_status")]
+    GetStatus = 32,
+    /// <summary>
+    /// 获取版本信息。
+    /// </summary>
+    [JsonPropertyName("get_version_info")]
+    GetVersionInfo = 33,
+    /// <summary>
+    /// 清理缓存。
+    /// </summary>
+    [JsonPropertyName("clean_cache")]
+    CleanCache = 34,
+    
+    /// <summary>
+    /// 发送戳一戳。
+    /// </summary>
+    [JsonPropertyName("send_poke")]
+    SendPoke = 35
+}
+
+/// <summary>
+/// 事件类型
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum EventType
+{
+    /// <summary>
+    /// 无
+    /// </summary>
+    [JsonPropertyName("none")]
+    None = -1,
+    /// <summary>
+    /// 元事件
+    /// </summary>
+    [JsonPropertyName("meta_event")]
+    Meta = 0,
+    
+    /// <summary>
+    /// 请求
+    /// </summary>
+    [JsonPropertyName("request")]
+    Request = 1,
+    /// <summary>
+    /// 通知
+    /// </summary>
+    [JsonPropertyName("notice")]
+    Notice = 2,
+    
+    /// <summary>
+    /// 消息
+    /// </summary>
+    [JsonPropertyName("message")]
+    Message = 3,
+    
+    /// <summary>
+    /// 自身发送消息
+    /// </summary>
+    [JsonPropertyName("message_sent")]
+    MessageSent = 4
 }
 
 /// <summary>
@@ -34,349 +808,4 @@ public enum BotConnectionType
     /// 本机作客户端,napcat作WebSocket服务器
     /// </summary>
     WebSocketClient = 3
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum EventType
-{
-    [JsonPropertyName("none")]
-    None = -1,
-    [JsonPropertyName("meta_event")]
-    Meta = 0,
-    
-    [JsonPropertyName("request")]
-    Request = 1,
-    
-    [JsonPropertyName("notice")]
-    Notice = 2,
-    
-    [JsonPropertyName("message")]
-    Message = 3,
-    
-    [JsonPropertyName("message_sent")]
-    MessageSent = 4
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum LifeCycleSubType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("enable")]
-    Enable,
-    [JsonPropertyName("disable")]
-    Disable,
-    [JsonPropertyName("connect")]
-    Connect
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum GroupIncreaseType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("approve")]
-    Approve,
-    [JsonPropertyName("invite")]
-    Invite
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum GroupDecreaseType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("kick")]
-    Kick,
-    [JsonPropertyName("leave")]
-    Leave,
-    [JsonPropertyName("kick_me")]
-    KickMe,
-    [JsonPropertyName("disband")]
-    Disband
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum GroupManagerType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("set")]
-    Set,
-    [JsonPropertyName("unset")]
-    Unset
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum GroupBanType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("ban")]
-    Ban,
-    [JsonPropertyName("lift_ban")]
-    LiftBan
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum GroupEssenceType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("add")]
-    Add,
-    [JsonPropertyName("delete")]
-    Delete
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum MessageType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("private")]
-    Private,
-    [JsonPropertyName("group")]
-    Group
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum PrivateMessageSubType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("friend")]
-    Friend,
-    [JsonPropertyName("group")]
-    Group,
-    [JsonPropertyName("other")]
-    Other
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum SexType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("male")]
-    Male,
-    [JsonPropertyName("female")]
-    Female,
-    [JsonPropertyName("unknown")]
-    Unknown
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum GroupRole
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("owner")]
-    Owner,
-    [JsonPropertyName("admin")]
-    Admin,
-    [JsonPropertyName("member")]
-    Member
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum MetaEventType
-{
-    [JsonPropertyName("none")]
-    None = -1,
-    [JsonPropertyName("heartbeat")]
-    Heartbeat = 0,
-    [JsonPropertyName("lifecycle")]
-    Lifecycle = 1
-}
-
-// New NoticeType enum extracted from all notice_type usages across the project
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum NoticeType
-{
-    [JsonPropertyName("none")]
-    None,
-    
-    // request-related
-    [JsonPropertyName("friend")]
-    Friend,
-    [JsonPropertyName("group")]
-    Group,
-    
-    // friend notices
-    [JsonPropertyName("friend_add")]
-    FriendAdd,
-    [JsonPropertyName("friend_recall")]
-    FriendRecall,
-    
-    // group notices
-    [JsonPropertyName("group_recall")]
-    GroupRecall,
-    [JsonPropertyName("group_increase")]
-    GroupIncrease,
-    [JsonPropertyName("group_decrease")]
-    GroupDecrease,
-    [JsonPropertyName("group_admin")]
-    GroupAdmin,
-    [JsonPropertyName("group_ban")]
-    GroupBan,
-    [JsonPropertyName("group_upload")]
-    GroupUpload,
-    [JsonPropertyName("group_card")]
-    GroupCard,
-    [JsonPropertyName("group_msg_emoji_like")]
-    GroupMsgEmojiLike,
-    [JsonPropertyName("essence")]
-    Essence,
-    
-    // notify wrapper for subtypes like poke, profile_like, input_status, title, group_name
-    [JsonPropertyName("notify")]
-    Notify,
-    
-    // other
-    [JsonPropertyName("bot_offline")]
-    BotOffline
-}
-
-// Add enum for notify sub_type values
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum NotifySubType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("poke")]
-    Poke,
-    [JsonPropertyName("profile_like")]
-    ProfileLike,
-    [JsonPropertyName("input_status")]
-    InputStatus,
-    [JsonPropertyName("title")]
-    Title,
-    [JsonPropertyName("group_name")]
-    GroupName
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum MessageDataType
-{
-    [JsonPropertyName("none")]
-    None,
-    [JsonPropertyName("text")]
-    Text,
-    [JsonPropertyName("image")]
-    Image,
-    [JsonPropertyName("face")]
-    Face,
-    [JsonPropertyName("at")]
-    At,
-    [JsonPropertyName("audio")]
-    Audio,
-    [JsonPropertyName("record")]
-    Record,
-    [JsonPropertyName("video")]
-    Video,
-    [JsonPropertyName("rps")]
-    Rps,
-    [JsonPropertyName("contact")]
-    Contact,
-    [JsonPropertyName("dice")]
-    Dice,
-    [JsonPropertyName("music")]
-    Music,
-    [JsonPropertyName("reply")]
-    Reply,
-    [JsonPropertyName("forward")]
-    Forward,
-    [JsonPropertyName("node")]
-    Node,
-    [JsonPropertyName("json")]
-    Json,
-    [JsonPropertyName("mface")]
-    MFace,
-    [JsonPropertyName("file")]
-    File
-}
-
-[JsonConverter(typeof(SafeJsonStringEnumConverter))]
-public enum ApiActionType
-{
-    [JsonPropertyName("none")]
-    None = -1,
-    [JsonPropertyName("send_private_msg")]
-    SendPrivateMsg = 0,
-    [JsonPropertyName("send_group_msg")]
-    SendGroupMsg = 1,
-    [JsonPropertyName("send_msg")]
-    SendMsg = 2,
-
-    [JsonPropertyName("delete_msg")]
-    DeleteMsg = 3,
-    [JsonPropertyName("get_msg")]
-    GetMsg = 4,
-    [JsonPropertyName("get_forward_msg")]
-    GetForwardMsg = 5,
-    
-    [JsonPropertyName("send_like")]
-    SendLike = 6,
-
-    [JsonPropertyName("set_group_kick")]
-    SetGroupKick = 7,
-    [JsonPropertyName("set_group_ban")]
-    SetGroupBan = 8,
-    [JsonPropertyName("set_group_whole_ban")]
-    SetGroupWholeBan = 9,
-    [JsonPropertyName("set_group_admin")]
-    SetGroupAdmin = 10,
-    [JsonPropertyName("set_group_card")]
-    SetGroupCard = 11,
-    [JsonPropertyName("set_group_name")]
-    SetGroupName = 12,
-    [JsonPropertyName("set_group_leave")]
-    SetGroupLeave = 13,
-    [JsonPropertyName("set_group_special_title")]
-    SetGroupSpecialTitle = 14,
-    [JsonPropertyName("set_friend_add_request")]
-    SetFriendAddRequest = 15,
-    [JsonPropertyName("set_group_add_request")]
-    SetGroupAddRequest = 16,
-
-    [JsonPropertyName("get_login_info")]
-    GetLoginInfo = 17,
-    [JsonPropertyName("get_stranger_info")]
-    GetStrangerInfo = 18,
-    [JsonPropertyName("get_friend_list")]
-    GetFriendList = 19,
-    [JsonPropertyName("get_group_info")]
-    GetGroupInfo = 20,
-    [JsonPropertyName("get_group_list")]
-    GetGroupList = 21,
-    [JsonPropertyName("get_group_member_info")]
-    GetGroupMemberInfo = 22,
-    [JsonPropertyName("get_group_member_list")]
-    GetGroupMemberList = 23,
-    [JsonPropertyName("get_group_honor_info")]
-    GetGroupHonorInfo = 24,
-    [JsonPropertyName("get_cookies")]
-    GetCookies = 25,
-    [JsonPropertyName("get_csrf_token")]
-    GetCsrfToken = 26,
-    [JsonPropertyName("get_credentials")]
-    GetCredentials = 27,
-    [JsonPropertyName("get_record")]
-    GetRecord = 28,
-    [JsonPropertyName("get_image")]
-    GetImage = 29,
-    [JsonPropertyName("can_send_image")]
-    CanSendImage = 30,
-    [JsonPropertyName("can_send_record")]
-    CanSendRecord = 31,
-    [JsonPropertyName("get_status")]
-    GetStatus = 32,
-    [JsonPropertyName("get_version_info")]
-    GetVersionInfo = 33,
-    [JsonPropertyName("clean_cache")]
-    CleanCache = 34,
-    
-    [JsonPropertyName("send_poke")]
-    SendPoke = 35
 }

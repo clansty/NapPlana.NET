@@ -5,8 +5,16 @@ using NapPlana.Core.Event.Handler;
 
 namespace NapPlana.Core.Event.Parser.Meta;
 
+/// <summary>
+/// 心跳事件解析器，负责解析 OneBot 心跳包并触发内部心跳事件。
+/// </summary>
 public class HeartBeatEventParser:MetaEventParser
 {
+    /// <summary>
+    /// 解析心跳事件 JSON 并分发到事件处理器。
+    /// </summary>
+    /// <param name="botEvent">原始 OneBot 心跳事件 JSON 字符串</param>
+    /// <exception cref="Exception">反序列化失败或不是心跳事件格式</exception>
     public override void ParseEvent(string botEvent)
     {
         var heartBeatEvent = JsonSerializer.Deserialize<HeartBeatEvent>(botEvent);

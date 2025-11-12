@@ -44,6 +44,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<HeartBeatEvent>? OnBotHeartbeat;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void BotHeartbeat(HeartBeatEvent ev)
     {
         OnBotHeartbeat?.Invoke(ev);
@@ -54,6 +58,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<LifeCycleEvent>? OnBotLifeCycle;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void BotLifeCycle(LifeCycleEvent ev)
     {
         OnBotLifeCycle?.Invoke(ev);
@@ -98,6 +106,10 @@ public static class BotEventHandler
     /// 消息 - 私信 - 临时会话
     /// </summary>
     public static event Action<PrivateMessageEvent>? OnPrivateMessageReceivedTemporary;
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void PrivateMessageReceivedTemporary(PrivateMessageEvent ev)
     {
         OnPrivateMessageReceivedTemporary?.Invoke(ev);
@@ -108,6 +120,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<PrivateMessageEvent>? OnPrivateMessageReceivedFriend;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void PrivateMessageReceivedFriend(PrivateMessageEvent ev)
     {
         OnPrivateMessageReceivedFriend?.Invoke(ev);
@@ -134,6 +150,10 @@ public static class BotEventHandler
     /// 消息发送 - 私聊
     /// </summary>
     public static event Action<PrivateMessageSentEvent>? OnMessageSentPrivate;
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void MessageSentPrivate(PrivateMessageSentEvent ev)
     {
         OnMessageSentPrivate?.Invoke(ev);
@@ -144,6 +164,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<PrivateMessageSentEvent>? OnMessageSentPrivateTemporary;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void MessageSentTemporary(PrivateMessageSentEvent ev)
     {
         OnMessageSentPrivateTemporary?.Invoke(ev);
@@ -154,6 +178,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<PrivateMessageSentEvent>? OnMessageSentPrivateFriend;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void MessageSentPrivateFriend(PrivateMessageSentEvent ev)
     {
         OnMessageSentPrivateFriend?.Invoke(ev);
@@ -168,6 +196,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<FriendAddNoticeEvent>? OnFriendAddNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void FriendAddNoticeReceived(FriendAddNoticeEvent ev)
     {
         OnFriendAddNoticeReceived?.Invoke(ev);
@@ -178,6 +210,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<FriendRecallNoticeEvent>? OnFriendRecallNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void FriendRecallNoticeReceived(FriendRecallNoticeEvent ev)
     {
         OnFriendRecallNoticeReceived?.Invoke(ev);
@@ -189,6 +225,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupAdminNoticeEvent>? OnGroupAdminNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupAdminNoticeReceived(GroupAdminNoticeEvent ev)
     {
         OnGroupAdminNoticeReceived?.Invoke(ev);
@@ -199,6 +239,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupAdminNoticeEvent>? OnGroupAdminSetNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupAdminSetNoticeReceived(GroupAdminNoticeEvent ev)
     {
         OnGroupAdminSetNoticeReceived?.Invoke(ev);
@@ -209,6 +253,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupAdminNoticeEvent>? OnGroupAdminUnsetNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupAdminUnsetNoticeReceived(GroupAdminNoticeEvent ev)
     {
         OnGroupAdminUnsetNoticeReceived?.Invoke(ev);
@@ -220,6 +268,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupBanNoticeEvent>? OnGroupBanNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupBanNoticeReceived(GroupBanNoticeEvent ev)
     {
         OnGroupBanNoticeReceived?.Invoke(ev);
@@ -230,6 +282,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupBanNoticeEvent>? OnGroupBanSetNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupBanSetNoticeReceived(GroupBanNoticeEvent ev)
     {
         OnGroupBanSetNoticeReceived?.Invoke(ev);
@@ -240,6 +296,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupBanNoticeEvent>? OnGroupBanLiftNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupBanLiftNoticeReceived(GroupBanNoticeEvent ev)
     {
         OnGroupBanLiftNoticeReceived?.Invoke(ev);
@@ -251,6 +311,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupCardEvent>? OnGroupCardNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupCardNoticeReceived(GroupCardEvent ev)
     {
         OnGroupCardNoticeReceived?.Invoke(ev);
@@ -262,6 +326,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupDecreaseNoticeEvent>? OnGroupDecreaseNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupDecreaseNoticeReceived(GroupDecreaseNoticeEvent ev)
     {
         OnGroupDecreaseNoticeReceived?.Invoke(ev);
@@ -272,6 +340,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupDecreaseNoticeEvent>? OnGroupDecreaseLeaveNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupDecreaseLeaveNoticeReceived(GroupDecreaseNoticeEvent ev)
     {
         OnGroupDecreaseLeaveNoticeReceived?.Invoke(ev);
@@ -282,6 +354,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupDecreaseNoticeEvent>? OnGroupDecreaseKickNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupDecreaseKickNoticeReceived(GroupDecreaseNoticeEvent ev)
     {
         OnGroupDecreaseKickNoticeReceived?.Invoke(ev);
@@ -292,6 +368,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupDecreaseNoticeEvent>? OnGroupDecreaseKickMeNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupDecreaseKickMeNoticeReceived(GroupDecreaseNoticeEvent ev)
     {
         OnGroupDecreaseKickMeNoticeReceived?.Invoke(ev);
@@ -303,6 +383,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupIncreaseNoticeEvent>? OnGroupIncreaseNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupIncreaseNoticeReceived(GroupIncreaseNoticeEvent ev)
     {
         OnGroupIncreaseNoticeReceived?.Invoke(ev);
@@ -313,6 +397,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupIncreaseNoticeEvent>? OnGroupIncreaseApproveNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupIncreaseApproveNoticeReceived(GroupIncreaseNoticeEvent ev)
     {
         OnGroupIncreaseApproveNoticeReceived?.Invoke(ev);
@@ -323,6 +411,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupIncreaseNoticeEvent>? OnGroupIncreaseInviteNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupIncreaseInviteNoticeReceived(GroupIncreaseNoticeEvent ev)
     {
         OnGroupIncreaseInviteNoticeReceived?.Invoke(ev);
@@ -334,6 +426,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupRecallNoticeEvent>? OnGroupRecallNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupRecallNoticeReceived(GroupRecallNoticeEvent ev)
     {
         OnGroupRecallNoticeReceived?.Invoke(ev);
@@ -345,6 +441,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupUploadNoticeEvent>? OnGroupUploadNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupUploadNoticeReceived(GroupUploadNoticeEvent ev)
     {
         OnGroupUploadNoticeReceived?.Invoke(ev);
@@ -356,6 +456,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupEssenceNoticeEvent>? OnGroupEssenceNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupEssenceNoticeReceived(GroupEssenceNoticeEvent ev)
     {
         OnGroupEssenceNoticeReceived?.Invoke(ev);
@@ -366,6 +470,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupEssenceNoticeEvent>? OnGroupEssenceAddNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupEssenceAddNoticeReceived(GroupEssenceNoticeEvent ev)
     {
         OnGroupEssenceAddNoticeReceived?.Invoke(ev);
@@ -376,6 +484,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupEssenceNoticeEvent>? OnGroupEssenceDeleteNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupEssenceDeleteNoticeReceived(GroupEssenceNoticeEvent ev)
     {
         OnGroupEssenceDeleteNoticeReceived?.Invoke(ev);
@@ -387,6 +499,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupMsgEmojiLikeNoticeEvent>? OnGroupMsgEmojiLikeNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupMsgEmojiLikeNoticeReceived(GroupMsgEmojiLikeNoticeEvent ev)
     {
         OnGroupMsgEmojiLikeNoticeReceived?.Invoke(ev);
@@ -398,6 +514,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<FriendPokeNoticeEvent>? OnFriendPokeNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void FriendPokeNoticeReceived(FriendPokeNoticeEvent ev)
     {
         OnFriendPokeNoticeReceived?.Invoke(ev);
@@ -408,6 +528,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupPokeNoticeEvent>? OnGroupPokeNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupPokeNoticeReceived(GroupPokeNoticeEvent ev)
     {
         OnGroupPokeNoticeReceived?.Invoke(ev);
@@ -418,6 +542,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<InputStatusNoticeEvent>? OnInputStatusNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void InputStatusNoticeReceived(InputStatusNoticeEvent ev)
     {
         OnInputStatusNoticeReceived?.Invoke(ev);
@@ -428,6 +556,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<GroupTitleEvent>? OnGroupTitleNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void GroupTitleNoticeReceived(GroupTitleEvent ev)
     {
         OnGroupTitleNoticeReceived?.Invoke(ev);
@@ -438,6 +570,10 @@ public static class BotEventHandler
     /// </summary>
     public static event Action<ProfileLikeNoticeEvent>? OnProfileLikeNoticeReceived;
 
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
     public static void ProfileLikeNoticeReceived(ProfileLikeNoticeEvent ev)
     {
         OnProfileLikeNoticeReceived?.Invoke(ev);

@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace NapPlana.Core.Data.API;
 
+/// <summary>
+/// 响应数据基类
+/// </summary>
 public class ResponseDataBase
 {
     
@@ -13,9 +16,15 @@ public class ResponseDataBase
 /// </summary>
 public class WsGlobalRequest
 {
+    /// <summary>
+    /// 操作类型
+    /// </summary>
     [JsonPropertyName("action")]
     public ApiActionType Action { get; set; } = ApiActionType.None;
     
+    /// <summary>
+    /// 请求体
+    /// </summary>
     [JsonPropertyName("params")]
     public object? Params { get; set; }
     

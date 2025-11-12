@@ -7,8 +7,16 @@ using NapPlana.Core.Exceptions;
 
 namespace NapPlana.Core.Event.Parser.Message;
 
+/// <summary>
+/// 自身消息发送事件解析器
+/// </summary>
 public class MessageSentEventParser: MessageEventParser
 {
+    /// <summary>
+    /// 解析事件是否为自身发送事件
+    /// </summary>
+    /// <param name="jsonEventData">数据</param>
+    /// <exception cref="UnSupportFeatureException">不是自身发送事件</exception>
     public override void ParseEvent(string jsonEventData)
     {
         var ev = JsonSerializer.Deserialize<MessageSentEvent>(jsonEventData);
@@ -31,8 +39,16 @@ public class MessageSentEventParser: MessageEventParser
     }
 }
 
+/// <summary>
+/// 私信消息自身发送事件解析器
+/// </summary>
 public class PrivateMessageSentEventParser : MessageSentEventParser
 {
+    /// <summary>
+    /// 解析事件是否为私聊消息发送事件
+    /// </summary>
+    /// <param name="jsonEventData">数据</param>
+    /// <exception cref="UnSupportFeatureException">不是对应事件</exception>
     public override void ParseEvent(string jsonEventData)
     {
         var ev = JsonSerializer.Deserialize<PrivateMessageSentEvent>(jsonEventData);

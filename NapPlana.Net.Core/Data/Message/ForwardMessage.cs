@@ -2,13 +2,24 @@
 
 namespace NapPlana.Core.Data.Message;
 
+/// <summary>
+/// 转发消息数据。
+/// </summary>
 public class ForwardMessageData : MessageDataBase
 {
+    /// <summary>
+    /// ID。
+    /// </summary>
     [JsonPropertyName("id")] public string? Id { get; set; }
-    // Received: structured content list (nodes). Leave as object list for flexibility.
+    /// <summary>
+    /// 内容。
+    /// </summary>
     [JsonPropertyName("content")] public List<object>? Content { get; set; }
 }
 
+/// <summary>
+/// 转发消息。
+/// </summary>
 public class ForwardMessage : MessageBase
 {
     public override MessageDataType MessageType { get; set; } = MessageDataType.Forward;

@@ -5,8 +5,16 @@ using NapPlana.Core.Exceptions;
 
 namespace NapPlana.Core.Event.Parser.Message;
 
+/// <summary>
+/// 消息事件解析器
+/// </summary>
 public class MessageEventParser: RootEventParser
 {
+    /// <summary>
+    /// 解析事件是否为消息事件
+    /// </summary>
+    /// <param name="jsonEventData">数据</param>
+    /// <exception cref="UnSupportFeatureException">不是消息事件</exception>
     public override void ParseEvent(string jsonEventData)
     {
         // 先做基础反序列化，判断是否是消息或消息发送事件

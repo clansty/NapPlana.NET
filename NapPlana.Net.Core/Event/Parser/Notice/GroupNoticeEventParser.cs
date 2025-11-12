@@ -6,8 +6,16 @@ using NapPlana.Core.Exceptions;
 
 namespace NapPlana.Core.Event.Parser.Notice;
 
+/// <summary>
+/// 群相关通知事件解析器，集中处理群成员增减、管理员、禁言、文件上传、名片、精华、消息表情等多种群事件。
+/// </summary>
 public class GroupNoticeEventParser: NoticeEventParser
 {
+    /// <summary>
+    /// 解析群通知事件并触发对应的内部事件，未匹配的类型将被忽略。
+    /// </summary>
+    /// <param name="botEvent">原始 OneBot 群通知事件 JSON 字符串</param>
+    /// <exception cref="UnSupportFeatureException">反序列化失败或事件类型不匹配</exception>
     public override void ParseEvent(string botEvent)
     {
         var baseEvent = JsonSerializer.Deserialize<NoticeEventBase>(botEvent);
@@ -134,4 +142,3 @@ public class GroupNoticeEventParser: NoticeEventParser
         }
     }
 }
-
