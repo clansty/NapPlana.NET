@@ -69,11 +69,15 @@ public class ConnectionService : IHostedService
             var services = _scope.ServiceProvider;
 
             // 将连接实例注入到作用域中
-            ActivatorUtilities.CreateInstance<BotContext>(
+            var botContext = ActivatorUtilities.CreateInstance<BotContext>(
                 services,
                 _connection,
                 Options.Create(_options));
-
+            
+            foreach (var service in services.GetServices<INapFunctionService>())
+            {
+                await service.InitializeAsync(botContext);
+            }
             _eventHandler.LogReceived(Core.Data.LogLevel.Info, 
                 $"ConnectionService 已启动，Bot QQ: {_options.SelfId}");
         }
@@ -101,7 +105,7 @@ public class ConnectionService : IHostedService
                 _connection = null;
             }
 
-            // 释放作用域（这会dispose BotContext）
+            // 释放作用域
             _scope?.Dispose();
             _scope = null;
 

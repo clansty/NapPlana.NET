@@ -1,9 +1,11 @@
+using System.Text.Json;
 using NapPlana.Core.Connections.WebSocket;
 using NapPlana.Core.Data;
 using NapPlana.Core.Event.Handler;
 using NapPlana.Core.Event.Parser;
 using NapPlana.Core.API;
 using NapPlana.Core.Connections.Plugins;
+using NapPlana.Core.Data.API;
 using TouchSocket.Core;
 using TouchSocket.Http.WebSockets;
 using LogLevel = NapPlana.Core.Data.LogLevel;
@@ -119,6 +121,67 @@ public class WebSocketDiConnection : WebsocketClientConnection
         {
             _client.Dispose();
             _client = null;
+        }
+    }
+    
+    /// <summary>
+    /// 发送原始消息,修改自WebsocketClientConnection
+    /// </summary>
+    /// <param name="message">消息json</param>
+    public override async Task SendMessageAsync(string message)
+    {
+        if (_client == null)
+        {
+            _eventHandler.LogReceived(LogLevel.Error, "无法发送消息，WebSocket未初始化");
+            return;
+        }
+        try
+        {
+            await _client.SendAsync(message);
+            _eventHandler.LogReceived(LogLevel.Debug, $"已发送消息: {message}");
+        }
+        catch (Exception ex)
+        {
+            _eventHandler.LogReceived(LogLevel.Error, $"发送消息失败: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// 发送消息,修改自WebsocketClientConnection
+    /// </summary>
+    /// <param name="actionType">操作</param>
+    /// <param name="message">消息内容</param>
+    /// <param name="echo">标识符</param>
+    public override async Task SendMessageAsync(ApiActionType actionType,object message,string echo)
+    {
+        if (_client == null)
+        {
+            _eventHandler.LogReceived(LogLevel.Error, "无法发送消息，WebSocket未初始化");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(echo))
+        {
+            _eventHandler.LogReceived(LogLevel.Error, "无法发送消息，WebSocket模式下Echo字段不可为空");
+            return;
+        }
+        //构造GlobalRequest
+        var req = new WsGlobalRequest()
+        {
+            Action = actionType,
+            Params = message,
+            Echo = echo
+        };
+        var mess = JsonSerializer.Serialize(req);
+        
+        try
+        {
+            await _client.SendAsync(mess);
+            _eventHandler.LogReceived(LogLevel.Debug, $"已发送消息: {message}");
+        }
+        catch (Exception ex)
+        {
+            _eventHandler.LogReceived(LogLevel.Error, $"发送消息失败: {ex.Message}");
         }
     }
 }

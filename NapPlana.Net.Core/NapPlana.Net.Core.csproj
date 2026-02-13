@@ -16,7 +16,7 @@
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0.txt</PackageLicenseUrl>
         <PackageIcon>nap_plana.jpeg</PackageIcon>
-        <Copyright>CopyRight © 2025 stevesensei All Rights.</Copyright>
+        <Copyright>CopyRight © 2026 stevesensei All Rights.</Copyright>
         <PackageReadmeFile>readme_nuget.md</PackageReadmeFile>
         <TargetFramework>net9.0</TargetFramework>
     </PropertyGroup>

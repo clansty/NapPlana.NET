@@ -19,7 +19,7 @@ namespace NapPlana.DI.Service;
 public class BotContext : INapBot, IDisposable
 {
     private readonly IApiHandler _apiHandler;
-    private readonly IEventHandler _eventHandler;
+    public readonly IEventHandler EventHandler;
     private readonly ConnectionBase _connection;
     private readonly NapBotOptions _options;
     private bool _disposed;
@@ -43,7 +43,7 @@ public class BotContext : INapBot, IDisposable
         IOptions<NapBotOptions> options)
     {
         _apiHandler = apiHandler ?? throw new ArgumentNullException(nameof(apiHandler));
-        _eventHandler = eventHandler ?? throw new ArgumentNullException(nameof(eventHandler));
+        EventHandler = eventHandler ?? throw new ArgumentNullException(nameof(eventHandler));
         _connection = connection ?? throw new ArgumentNullException(nameof(connection));
         _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
         
@@ -154,6 +154,6 @@ public class BotContext : INapBot, IDisposable
             return;
 
         _disposed = true;
-        _eventHandler.LogReceived(Core.Data.LogLevel.Debug, "BotContext 已释放");
+        EventHandler.LogReceived(Core.Data.LogLevel.Debug, "BotContext 已释放");
     }
 }

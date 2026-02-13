@@ -29,7 +29,13 @@ public static class ServiceCollectionExtensions
         services.Configure<NapBotOptions>(napBotSection);
 
         // 注册核心服务为Singleton
-        services.AddSingleton<IEventHandler, EventHandler>();
+        services.AddSingleton<IEventHandler, EventHandler>(sp =>
+        {
+            var eventHandler = new EventHandler();
+            BotEventHandler.SetInstance(eventHandler);
+            return eventHandler;
+        });
+        
         services.AddSingleton<IApiHandler, ApiHandler>();
         services.AddSingleton<IEventParser, RootEventParser>();
 
@@ -40,7 +46,7 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// 添加NapBot DI服务（使用委托配置）
+    /// 添加NapBot DI服务
     /// </summary>
     /// <param name="services">服务集合</param>
     /// <param name="configureOptions">配置委托</param>
@@ -53,7 +59,12 @@ public static class ServiceCollectionExtensions
         services.Configure(configureOptions);
 
         // 注册核心服务
-        services.AddSingleton<IEventHandler, EventHandler>();
+        services.AddSingleton<IEventHandler, EventHandler>(_ =>
+        {
+            var eventHandler = new EventHandler();
+            BotEventHandler.SetInstance(eventHandler);
+            return eventHandler;
+        });
         services.AddSingleton<IApiHandler, ApiHandler>();
         services.AddSingleton<IEventParser, RootEventParser>();
 
@@ -98,6 +109,21 @@ public static class ServiceCollectionExtensions
         // 注册ConnectionService为HostedService
         services.AddHostedService<ConnectionService>();
 
+        return services;
+    }
+
+
+    /// <summary>
+    /// 添加自定义机器人相关服务
+    /// </summary>
+    /// <param name="services"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static IServiceCollection AddNapFunctionService<T>(this IServiceCollection services)
+        where T : class, INapFunctionService
+    {
+        services.AddSingleton<T>();
+        services.AddSingleton<INapFunctionService>(sp => sp.GetRequiredService<T>());
         return services;
     }
 }

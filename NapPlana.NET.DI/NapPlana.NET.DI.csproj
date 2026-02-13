@@ -5,12 +5,34 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>NapPlana.DI</RootNamespace>
+        <Version>0.0.1</Version>
+        <Title>NapPlana.NET.DI</Title>
+        <Authors>stevesensei</Authors>
+        <Description>A dependency injection implementation for NapPlana</Description>
+        <Copyright>CopyRight © 2026 stevesensei All Rights.</Copyright>
+        <PackageProjectUrl>https://github.com/stevesensei/NapPlana.NET</PackageProjectUrl>
+        <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0.txt</PackageLicenseUrl>
+        <PackageIcon>nap_plana.jpeg</PackageIcon>
+        <PackageReadmeFile>readme_nuget.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/stevesensei/NapPlana.NET</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.0" />
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
-      <PackageReference Include="NapPlana.NET" Version="0.2.7" />
+      <PackageReference Include="NapPlana.NET" Version="0.2.7.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\readme_nuget.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+        <Link>readme_nuget.md</Link>
+      </None>
+      <None Update="nap_plana.jpeg">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>
