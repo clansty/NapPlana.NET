@@ -1,12 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NapPlana.Net.Example", "NapPlana.Net.Example\NapPlana.Net.Example.csproj", "{F0443E98-53BB-4ED2-BA19-F054CF34F79B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NapPlana.Net.Core", "NapPlana.Net.Core\NapPlana.Net.Core.csproj", "{41E4EB08-7498-4797-AB63-C92029CADBB4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{A12BF739-4C7F-4B74-BB0D-7DA8040264B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NapPlana.NET.DI", "NapPlana.NET.DI\NapPlana.NET.DI.csproj", "{FDCAB45D-8EC8-4A3F-B1BF-0D024CC28FCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NapPlana.Net.DI", "NapPlana.Net.DI\NapPlana.Net.DI.csproj", "{FDCAB45D-8EC8-4A3F-B1BF-0D024CC28FCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NapPlana.Net.DiExample", "NapPlana.Net.DiExample\NapPlana.Net.DiExample.csproj", "{CE05AB30-9589-4F3C-B3E9-BDACC56F5851}"
 EndProject
@@ -32,6 +35,9 @@ Global
 		{CE05AB30-9589-4F3C-B3E9-BDACC56F5851}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE05AB30-9589-4F3C-B3E9-BDACC56F5851}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE05AB30-9589-4F3C-B3E9-BDACC56F5851}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F0443E98-53BB-4ED2-BA19-F054CF34F79B} = {A12BF739-4C7F-4B74-BB0D-7DA8040264B0}

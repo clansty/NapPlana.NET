@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <RootNamespace>NapPlana.DI</RootNamespace>
         <Version>0.0.1</Version>
-        <Title>NapPlana.NET.DI</Title>
+        <Title>NapPlana.Net.DI</Title>
         <Authors>stevesensei</Authors>
         <Description>A dependency injection implementation for NapPlana</Description>
         <Copyright>CopyRight © 2026 stevesensei All Rights.</Copyright>

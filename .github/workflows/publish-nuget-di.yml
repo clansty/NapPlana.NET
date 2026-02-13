@@ -1,0 +1,45 @@
+﻿name: publish-nuget-di
+run-name: 发布DI nuget包，版本：${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - "*"
+  
+jobs:
+  publish-nuget-packages:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: 安装.NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x
+      - name: 恢复依赖
+        run: dotnet restore ./NapPlana.Net.DI/NapPlana.Net.DI.csproj
+      - name: 获取tag
+        id: version
+        shell: bash
+        run: |
+          ref="${GITHUB_REF_NAME}"
+          # Strip leading 'v' if present (e.g., v1.2.3 -> 1.2.3)
+          if [[ "$ref" == v* ]]; then
+            ref="${ref#v}"
+          fi
+          echo "PACKAGE_VERSION=$ref" >> "$GITHUB_ENV"
+          echo "package_version=$ref" >> "$GITHUB_OUTPUT"
+      - name: 构建
+        run: dotnet build --no-restore -c Release ./NapPlana.Net.DI/NapPlana.Net.DI.csproj
+      - name: 创建软件包
+        run: dotnet pack --no-build -c Release -p:PackageVersion=${{ env.PACKAGE_VERSION }} ./NapPlana.Net.DI/NapPlana.Net.DI.csproj
+      - name: 添加nuget源
+        run: dotnet nuget add source --username stevesensei --password ${{ secrets.TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/napplana/index.json"
+      - name: 推送到github packages
+        run: dotnet nuget push ./NapPlana.Net.DI/bin/Release/*.nupkg --api-key ${{ secrets.TOKEN }} --source github --skip-duplicate
+      - name: 推送到nuget
+        run: dotnet nuget push ./NapPlana.Net.DI/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_GALLERY_TOKEN }}  --source nuget.org --skip-duplicate

@@ -10,7 +10,7 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
-      <ProjectReference Include="..\NapPlana.NET.DI\NapPlana.NET.DI.csproj" />
+      <ProjectReference Include="..\NapPlana.NET.DI\NapPlana.Net.DI.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,5 +1,5 @@
 ﻿name: publish-nuget
-run-name: 发布nuget包，版本：${{ github.ref_name }}
+run-name: 发布Core nuget包，版本：${{ github.ref_name }}
 
 on:
   push:
