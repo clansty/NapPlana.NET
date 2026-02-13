@@ -15,7 +15,7 @@ namespace NapPlana.Core.Connections.Plugins;
 /// </summary>
 public class WebSocketMessageReceiverPlugin: PluginBase, IWebSocketReceivedPlugin
 {
-    private readonly RootEventParser _parser = new();
+    private readonly RootEventParser _parser = new(BotEventHandler.GetInstance());
 
     /// <summary>
     /// 当接收到WebSocket消息时触发

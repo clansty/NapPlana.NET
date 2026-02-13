@@ -9,7 +9,7 @@ namespace NapPlana.Core.Event.Parser.Notice;
 /// <summary>
 /// Notify 子类型通知事件解析器，处理戳一戳、资料点赞、输入状态、群名/头衔变更等通知。
 /// </summary>
-public class NotifyNoticeEventParser: NoticeEventParser
+public class NotifyNoticeEventParser(IEventHandler handler) : NoticeEventParser(handler)
 {
     /// <summary>
     /// 解析 notify 子类型事件，基于 <c>sub_type</c> 分发到具体内部事件；非 notify 类型直接返回。
@@ -43,13 +43,13 @@ public class NotifyNoticeEventParser: NoticeEventParser
                 {
                     var groupPoke = JsonSerializer.Deserialize<GroupPokeNoticeEvent>(botEvent);
                     if (groupPoke == null) throw new UnSupportFeatureException("群戳一戳事件反序列化失败"); 
-                    BotEventHandler.GroupPokeNoticeReceived(groupPoke);
+                    handler.GroupPokeNoticeReceived(groupPoke);
                 }
                 else
                 {
                     var friendPoke = JsonSerializer.Deserialize<FriendPokeNoticeEvent>(botEvent);
                     if (friendPoke == null) throw new UnSupportFeatureException("好友戳一戳事件反序列化失败");
-                    BotEventHandler.FriendPokeNoticeReceived(friendPoke);
+                    handler.FriendPokeNoticeReceived(friendPoke);
                 }
                 break;
             }
@@ -57,32 +57,32 @@ public class NotifyNoticeEventParser: NoticeEventParser
             {
                 var profileLike = JsonSerializer.Deserialize<ProfileLikeNoticeEvent>(botEvent);
                 if (profileLike == null) throw new UnSupportFeatureException("资料点赞事件反序列化失败");
-                BotEventHandler.ProfileLikeNoticeReceived(profileLike);
+                handler.ProfileLikeNoticeReceived(profileLike);
                 break;
             }
             case "input_status":
             {
                 var inputStatus = JsonSerializer.Deserialize<InputStatusNoticeEvent>(botEvent);
                 if (inputStatus == null) throw new UnSupportFeatureException("输入状态事件反序列化失败");
-                BotEventHandler.InputStatusNoticeReceived(inputStatus);
+                handler.InputStatusNoticeReceived(inputStatus);
                 break;
             }
             case "group_name":
             {
                 var groupName = JsonSerializer.Deserialize<GroupNameEvent>(botEvent);
                 if (groupName == null) throw new UnSupportFeatureException("群名变更事件反序列化失败");
-                BotEventHandler.LogReceived(LogLevel.Info, $"群{groupName.GroupId} 新名称 {groupName.NewName}");
+                handler.LogReceived(LogLevel.Info, $"群{groupName.GroupId} 新名称 {groupName.NewName}");
                 break;
             }
             case "title":
             {
                 var groupTitle = JsonSerializer.Deserialize<GroupTitleEvent>(botEvent);
                 if (groupTitle == null) throw new UnSupportFeatureException("群头衔变更事件反序列化失败"); 
-                BotEventHandler.GroupTitleNoticeReceived(groupTitle);
+                handler.GroupTitleNoticeReceived(groupTitle);
                 break;
             }
             default:
-                BotEventHandler.LogReceived(LogLevel.Debug, $"收到未识别的notify子类型: {subTypeStr}");
+                handler.LogReceived(LogLevel.Debug, $"收到未识别的notify子类型: {subTypeStr}");
                 break;
         }
     }

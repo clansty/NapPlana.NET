@@ -28,7 +28,7 @@ public static class BotEventHandler
     /// <summary>
     /// 获取当前事件处理器实例
     /// </summary>
-    internal static IEventHandler GetInstance() => _instance;
+    public static IEventHandler GetInstance() => _instance;
     
     #region 日志事件
     

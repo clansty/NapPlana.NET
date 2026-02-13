@@ -9,7 +9,7 @@ namespace NapPlana.Core.Event.Parser.Notice;
 /// <summary>
 /// 好友相关通知事件解析器，处理好友添加、好友消息撤回等事件。
 /// </summary>
-public class FriendNoticeEventParser: NoticeEventParser
+public class FriendNoticeEventParser(IEventHandler handler) : NoticeEventParser(handler)
 {
     /// <summary>
     /// 解析好友通知事件并触发对应内部事件，非好友类型将被忽略。
@@ -31,7 +31,7 @@ public class FriendNoticeEventParser: NoticeEventParser
                 var addEvent = JsonSerializer.Deserialize<FriendAddNoticeEvent>(botEvent);
                 if (addEvent == null)
                     throw new UnSupportFeatureException("好友添加事件反序列化失败");
-                BotEventHandler.FriendAddNoticeReceived(addEvent);
+                handler.FriendAddNoticeReceived(addEvent);
                 break;
             }
             case NoticeType.FriendRecall:
@@ -39,7 +39,7 @@ public class FriendNoticeEventParser: NoticeEventParser
                 var recallEvent = JsonSerializer.Deserialize<FriendRecallNoticeEvent>(botEvent);
                 if (recallEvent == null)
                     throw new UnSupportFeatureException("好友消息撤回事件反序列化失败");
-                BotEventHandler.FriendRecallNoticeReceived(recallEvent);
+                handler.FriendRecallNoticeReceived(recallEvent);
                 break;
             }
             default:

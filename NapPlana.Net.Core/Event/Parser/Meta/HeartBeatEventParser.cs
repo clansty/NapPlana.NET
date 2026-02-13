@@ -8,7 +8,7 @@ namespace NapPlana.Core.Event.Parser.Meta;
 /// <summary>
 /// 心跳事件解析器，负责解析 OneBot 心跳包并触发内部心跳事件。
 /// </summary>
-public class HeartBeatEventParser:MetaEventParser
+public class HeartBeatEventParser(IEventHandler handler) :MetaEventParser(handler)
 {
     /// <summary>
     /// 解析心跳事件 JSON 并分发到事件处理器。
@@ -23,7 +23,7 @@ public class HeartBeatEventParser:MetaEventParser
             throw new Exception("无法解析该事件数据，可能不是OneBot心跳包事件格式");
         }
         
-        BotEventHandler.LogReceived(LogLevel.Debug,$"收到心跳包，时间戳{heartBeatEvent.TimeStamp}");
-        BotEventHandler.BotHeartbeat(heartBeatEvent);
+        handler.LogReceived(LogLevel.Debug,$"收到心跳包，时间戳{heartBeatEvent.TimeStamp}");
+        handler.BotHeartbeat(heartBeatEvent);
     }
 }

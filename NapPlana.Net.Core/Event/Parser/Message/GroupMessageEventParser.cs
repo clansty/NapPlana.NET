@@ -9,7 +9,7 @@ namespace NapPlana.Core.Event.Parser.Message;
 /// <summary>
 /// 检查并解析OneBot群消息事件
 /// </summary>
-public class GroupMessageEventParser: MessageEventParser
+public class GroupMessageEventParser(IEventHandler handler) : MessageEventParser(handler)
 {
     /// <summary>
     /// 解析事件是否为Group消息事件
@@ -23,6 +23,6 @@ public class GroupMessageEventParser: MessageEventParser
         {
             throw new UnSupportFeatureException("无法解析该事件数据，可能不是OneBot群消息事件格式");
         }
-        BotEventHandler.GroupMessageReceived(ev);
+        handler.GroupMessageReceived(ev);
     }
 }

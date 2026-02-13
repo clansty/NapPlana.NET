@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using NapPlana.Core.Data;
 using NapPlana.Core.Data.Event.Message;
+using NapPlana.Core.Event.Handler;
 using NapPlana.Core.Exceptions;
 
 namespace NapPlana.Core.Event.Parser.Message;
@@ -8,8 +9,10 @@ namespace NapPlana.Core.Event.Parser.Message;
 /// <summary>
 /// 消息事件解析器
 /// </summary>
-public class MessageEventParser: RootEventParser
+public class MessageEventParser(IEventHandler handler) : RootEventParser(handler)
 {
+    private readonly IEventHandler _handler = handler;
+
     /// <summary>
     /// 解析事件是否为消息事件
     /// </summary>
@@ -26,7 +29,7 @@ public class MessageEventParser: RootEventParser
 
         if (baseEvent.PostType == EventType.MessageSent)
         {
-            var sentParser = new MessageSentEventParser();
+            var sentParser = new MessageSentEventParser(_handler);
             sentParser.ParseEvent(jsonEventData);
             return;
         }
@@ -45,11 +48,11 @@ public class MessageEventParser: RootEventParser
         switch (messageType)
         {
             case "private":
-                var privateParser = new PrivateMessageEventParser();
+                var privateParser = new PrivateMessageEventParser(_handler);
                 privateParser.ParseEvent(jsonEventData);
                 break;
             case "group":
-                var groupParser = new GroupMessageEventParser();
+                var groupParser = new GroupMessageEventParser(_handler);
                 groupParser.ParseEvent(jsonEventData);
                 break;
         }

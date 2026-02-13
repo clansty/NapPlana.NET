@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using NapPlana.Core.Data;
 using NapPlana.Core.Data.Event.Notice;
+using NapPlana.Core.Event.Handler;
 using NapPlana.Core.Exceptions;
 
 namespace NapPlana.Core.Event.Parser.Notice;
@@ -8,8 +9,10 @@ namespace NapPlana.Core.Event.Parser.Notice;
 /// <summary>
 /// 通知事件解析器，负责识别并分发 OneBot 通知事件到更细分的解析器（好友、群、notify、离线等）。
 /// </summary>
-public class NoticeEventParser: RootEventParser
+public class NoticeEventParser(IEventHandler handler) : RootEventParser(handler)
 {
+    private readonly IEventHandler _handler = handler;
+
     /// <summary>
     /// 解析通知事件 JSON 并根据 <c>notice_type</c> 分发到对应的子解析器。
     /// </summary>
@@ -29,7 +32,7 @@ public class NoticeEventParser: RootEventParser
             case NoticeType.FriendAdd:
             case NoticeType.FriendRecall:
             {
-                var friendParser = new FriendNoticeEventParser();
+                var friendParser = new FriendNoticeEventParser(_handler);
                 friendParser.ParseEvent(botEvent);
                 break;
             }
@@ -44,20 +47,20 @@ public class NoticeEventParser: RootEventParser
             case NoticeType.Essence:
             case NoticeType.GroupMsgEmojiLike:
             {
-                var groupParser = new GroupNoticeEventParser();
+                var groupParser = new GroupNoticeEventParser(_handler);
                 groupParser.ParseEvent(botEvent);
                 break;
             }
             //notify
             case NoticeType.Notify:
             {
-                var notifyParser = new NotifyNoticeEventParser();
+                var notifyParser = new NotifyNoticeEventParser(_handler);
                 notifyParser.ParseEvent(botEvent);
                 break;
             }
             case NoticeType.BotOffline:
             {
-                var offlineParser = new BotOfflineNoticeEventParser();
+                var offlineParser = new BotOfflineNoticeEventParser(_handler);
                 offlineParser.ParseEvent(botEvent);
                 break;
             }

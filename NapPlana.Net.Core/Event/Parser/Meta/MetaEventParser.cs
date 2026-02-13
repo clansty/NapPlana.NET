@@ -1,14 +1,17 @@
 ﻿using System.Text.Json;
 using NapPlana.Core.Data;
 using NapPlana.Core.Data.Event.Meta;
+using NapPlana.Core.Event.Handler;
 
 namespace NapPlana.Core.Event.Parser.Meta;
 
 /// <summary>
 /// 元事件解析器，负责识别并分发生命周期与心跳等 Meta 事件。
 /// </summary>
-public class MetaEventParser: RootEventParser
+public class MetaEventParser(IEventHandler handler) : RootEventParser(handler)
 {
+    private readonly IEventHandler _handler = handler;
+
     /// <summary>
     /// 解析 Meta 类型事件并分发到具体的生命周期/心跳解析器。
     /// </summary>
@@ -25,11 +28,11 @@ public class MetaEventParser: RootEventParser
         switch (metaEvent.MetaEventType)
         {
             case MetaEventType.Lifecycle:
-                var lifeCycleParser = new LifeCycleEventParser();
+                var lifeCycleParser = new LifeCycleEventParser(_handler);
                 lifeCycleParser.ParseEvent(botEvent);
                 break;
             case MetaEventType.Heartbeat:
-                var heartbeatParser = new HeartBeatEventParser();
+                var heartbeatParser = new HeartBeatEventParser(_handler);
                 heartbeatParser.ParseEvent(botEvent);
                 break;
         }

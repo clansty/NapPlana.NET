@@ -10,7 +10,7 @@ namespace NapPlana.Core.Event.Parser.Message;
 /// <summary>
 /// 自身消息发送事件解析器
 /// </summary>
-public class MessageSentEventParser: MessageEventParser
+public class MessageSentEventParser(IEventHandler handler) : MessageEventParser(handler)
 {
     /// <summary>
     /// 解析事件是否为自身发送事件
@@ -28,7 +28,7 @@ public class MessageSentEventParser: MessageEventParser
         switch (ev.MessageType)
         {
             case MessageType.Private:
-                var privateMsg = new PrivateMessageSentEventParser();
+                var privateMsg = new PrivateMessageSentEventParser(handler);
                 privateMsg.ParseEvent(jsonEventData);
                 return;
             case MessageType.Group:
@@ -42,7 +42,7 @@ public class MessageSentEventParser: MessageEventParser
 /// <summary>
 /// 私信消息自身发送事件解析器
 /// </summary>
-public class PrivateMessageSentEventParser : MessageSentEventParser
+public class PrivateMessageSentEventParser(IEventHandler handler) : MessageSentEventParser(handler)
 {
     /// <summary>
     /// 解析事件是否为私聊消息发送事件
@@ -56,7 +56,7 @@ public class PrivateMessageSentEventParser : MessageSentEventParser
         {
             throw new UnSupportFeatureException("无法解析该事件数据，可能不是OneBot私聊消息发送事件格式");
         }
-        BotEventHandler.MessageSentPrivate(ev);
+        handler.MessageSentPrivate(ev);
         
         switch (ev.SubType)
         {
@@ -64,11 +64,11 @@ public class PrivateMessageSentEventParser : MessageSentEventParser
             case PrivateMessageSubType.Group:
                 if (ev.TempFlag.HasValue)
                 {
-                    BotEventHandler.MessageSentTemporary(ev);
+                    handler.MessageSentTemporary(ev);
                 }
                 break;
             case PrivateMessageSubType.Friend:
-                BotEventHandler.MessageSentPrivateFriend(ev);
+                handler.MessageSentPrivateFriend(ev);
                 break;
         }
     }
