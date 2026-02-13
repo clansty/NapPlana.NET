@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using NapPlana.Core.Bot;
-using NapPlana.Core.Bot.BotInstance;
 using NapPlana.Core.Data.API;
 using NapPlana.Core.Event.Handler;
 

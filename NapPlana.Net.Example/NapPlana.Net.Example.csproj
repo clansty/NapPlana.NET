@@ -10,7 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NapPlana.Net.Core\NapPlana.Net.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -18,6 +17,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.1" />
+        <PackageReference Include="NapPlana.NET" Version="0.2.6.1" />
     </ItemGroup>
 
     <ItemGroup>

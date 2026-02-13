@@ -12,18 +12,6 @@ public interface INapBot
     /// </summary>
     long SelfId { get; set; }
     /// <summary>
-    /// 启动机器人实例
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task StartAsync(CancellationToken cancellationToken = default);
-    /// <summary>
-    /// 关闭机器人
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task StopAsync(CancellationToken cancellationToken = default);
-    /// <summary>
     /// 发送群聊消息
     /// </summary>
     /// <param name="groupMessage">消息结构</param>

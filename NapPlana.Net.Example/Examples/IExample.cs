@@ -1,5 +1,4 @@
 ﻿using NapPlana.Core.Bot;
-using NapPlana.Core.Bot.BotInstance;
 
 namespace NapPlana.Example.Examples;
 

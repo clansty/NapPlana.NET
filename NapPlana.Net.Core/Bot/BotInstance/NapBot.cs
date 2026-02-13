@@ -17,11 +17,13 @@ public class NapBot: INapBot
     /// </summary>
     public long SelfId { get; set; } = 0;
 
+    [Obsolete("接下来将会迁移到一个专门的连接管理服务中，这里只做注入用的上下文")]
     public async Task StartAsync(CancellationToken cancellationToken = default)
     {
         await _connection.InitializeAsync();
     }
 
+    [Obsolete("接下来将会迁移到一个专门的连接管理服务中，这里只做注入用的上下文")]
     public async Task StopAsync(CancellationToken cancellationToken = default)
     {
         await _connection.ShutdownAsync();
