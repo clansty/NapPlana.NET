@@ -31,7 +31,7 @@ public class ForwardMessageBuilder
     public List<MessageBase> Build() => _messages;
 
     /// <summary>
-    /// 设置转发卡片来源名称
+    /// 设置转发卡片标题行的内容（xxx 的聊天记录）
     /// </summary>
     public ForwardMessageBuilder SetSource(string source)
     {
@@ -49,7 +49,7 @@ public class ForwardMessageBuilder
     }
 
     /// <summary>
-    /// 设置转发卡片摘要
+    /// 设置转发卡片摘要（点击查看 x 条聊天记录）
     /// </summary>
     public ForwardMessageBuilder SetSummary(string summary)
     {
@@ -58,7 +58,7 @@ public class ForwardMessageBuilder
     }
 
     /// <summary>
-    /// 设置转发卡片提示文本
+    /// 设置转发卡片在消息列表中的外显文本（[聊天记录]）
     /// </summary>
     public ForwardMessageBuilder SetPrompt(string prompt)
     {

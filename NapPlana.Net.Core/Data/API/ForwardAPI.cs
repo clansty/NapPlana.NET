@@ -28,7 +28,7 @@ public abstract class ForwardMessageSendBase
     public List<MessageBase> Messages { get; set; } = new();
 
     /// <summary>
-    /// 转发卡片来源名称（可选）
+    /// 转发卡片标题行的内容（xxx 的聊天记录）（可选）
     /// </summary>
     [JsonPropertyName("source")]
     public string? Source { get; set; }
@@ -40,13 +40,13 @@ public abstract class ForwardMessageSendBase
     public List<ForwardNewsItem>? News { get; set; }
 
     /// <summary>
-    /// 转发卡片摘要（可选）
+    /// 转发卡片摘要（点击查看 x 条聊天记录）（可选）
     /// </summary>
     [JsonPropertyName("summary")]
     public string? Summary { get; set; }
 
     /// <summary>
-    /// 转发卡片提示文本（可选）
+    /// 转发卡片在消息列表中的外显文本（[聊天记录]）（可选）
     /// </summary>
     [JsonPropertyName("prompt")]
     public string? Prompt { get; set; }
