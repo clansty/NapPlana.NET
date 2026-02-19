@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using NapPlana.Core.Utilities;
 
 namespace NapPlana.Core.Data;
@@ -742,7 +742,25 @@ public enum ApiActionType
     /// 发送戳一戳。
     /// </summary>
     [JsonPropertyName("send_poke")]
-    SendPoke = 35
+    SendPoke = 35,
+    
+    /// <summary>
+    /// 发送群合并转发消息。
+    /// </summary>
+    [JsonPropertyName("send_group_forward_msg")]
+    SendGroupForwardMsg = 36,
+    
+    /// <summary>
+    /// 发送私聊合并转发消息。
+    /// </summary>
+    [JsonPropertyName("send_private_forward_msg")]
+    SendPrivateForwardMsg = 37,
+    
+    /// <summary>
+    /// 发送合并转发消息。
+    /// </summary>
+    [JsonPropertyName("send_forward_msg")]
+    SendForwardMsg = 38
 }
 
 /// <summary>

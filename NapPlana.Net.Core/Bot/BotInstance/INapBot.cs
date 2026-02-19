@@ -40,4 +40,14 @@ public interface INapBot
     /// <param name="deleteGroupMessage">消息结构</param>
     /// <returns>无</returns>
     Task DeleteGroupMessageAsync(GroupMessageDelete deleteGroupMessage);
+    
+    /// <summary>
+    /// 发送群合并转发消息
+    /// </summary>
+    Task<ForwardMessageSendResponseData> SendGroupForwardMessageAsync(GroupForwardMessageSend message, int timeoutSeconds = 15);
+    
+    /// <summary>
+    /// 发送私聊合并转发消息
+    /// </summary>
+    Task<ForwardMessageSendResponseData> SendPrivateForwardMessageAsync(PrivateForwardMessageSend message, int timeoutSeconds = 15);
 }

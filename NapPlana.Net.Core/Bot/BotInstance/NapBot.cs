@@ -1,4 +1,4 @@
-﻿using NapPlana.Core.API;
+using NapPlana.Core.API;
 using NapPlana.Core.Connections;
 using NapPlana.Core.Data;
 using NapPlana.Core.Data.Action;
@@ -108,7 +108,7 @@ public class NapBot: INapBot
     public async Task<GroupMessageSendResponseData> SendGroupMessageAsync(GroupMessageSend groupMessage,int timeoutSeconds = 15)
     {
         if (groupMessage is null) throw new ArgumentNullException(nameof(groupMessage));
-        var res =  await SendMessageAsync<GroupMessageSendResponseData>(groupMessage,ApiActionType.SendGroupMsg);
+        var res =  await SendMessageAsync<GroupMessageSendResponseData>(groupMessage,ApiActionType.SendGroupMsg, timeoutSeconds);
         return res ?? throw new Exception("Failed to send group message.");
     }
 
@@ -121,7 +121,7 @@ public class NapBot: INapBot
     /// <exception cref="ArgumentNullException">传参错误</exception>
     public async Task<PrivateMessageSendResponseData> SendPrivateMessageAsync(PrivateMessageSend privateMessage, int timeoutSeconds = 15) {
         if (privateMessage is null) throw new ArgumentNullException(nameof(privateMessage));
-        var res = await SendMessageAsync<PrivateMessageSendResponseData>(privateMessage, ApiActionType.SendPrivateMsg);
+        var res = await SendMessageAsync<PrivateMessageSendResponseData>(privateMessage, ApiActionType.SendPrivateMsg, timeoutSeconds);
         return res ?? throw new Exception("Failed to send private message.");
     }
 
@@ -145,5 +145,31 @@ public class NapBot: INapBot
     {
         if (deleteGroupMessage is null) throw new ArgumentNullException(nameof(deleteGroupMessage));
         await SendMessageAsync<ResponseDataBase>(deleteGroupMessage,ApiActionType.DeleteMsg);
+    }
+
+    /// <summary>
+    /// 发送群合并转发消息
+    /// </summary>
+    /// <param name="message">消息结构</param>
+    /// <param name="timeoutSeconds">超时时间</param>
+    /// <returns>响应数据</returns>
+    public async Task<ForwardMessageSendResponseData> SendGroupForwardMessageAsync(GroupForwardMessageSend message, int timeoutSeconds = 15)
+    {
+        if (message is null) throw new ArgumentNullException(nameof(message));
+        var res = await SendMessageAsync<ForwardMessageSendResponseData>(message, ApiActionType.SendGroupForwardMsg, timeoutSeconds);
+        return res ?? throw new Exception("Failed to send group forward message.");
+    }
+
+    /// <summary>
+    /// 发送私聊合并转发消息
+    /// </summary>
+    /// <param name="message">消息结构</param>
+    /// <param name="timeoutSeconds">超时时间</param>
+    /// <returns>响应数据</returns>
+    public async Task<ForwardMessageSendResponseData> SendPrivateForwardMessageAsync(PrivateForwardMessageSend message, int timeoutSeconds = 15)
+    {
+        if (message is null) throw new ArgumentNullException(nameof(message));
+        var res = await SendMessageAsync<ForwardMessageSendResponseData>(message, ApiActionType.SendPrivateForwardMsg, timeoutSeconds);
+        return res ?? throw new Exception("Failed to send private forward message.");
     }
 }
