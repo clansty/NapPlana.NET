@@ -172,4 +172,14 @@ public class NapBot: INapBot
         var res = await SendMessageAsync<ForwardMessageSendResponseData>(message, ApiActionType.SendPrivateForwardMsg, timeoutSeconds);
         return res ?? throw new Exception("Failed to send private forward message.");
     }
+
+    /// <summary>
+    /// 贴表情
+    /// </summary>
+    /// <param name="message">消息结构</param>
+    public async Task SetMsgEmojiLikeAsync(MsgEmojiLikeSend message)
+    {
+        if (message is null) throw new ArgumentNullException(nameof(message));
+        await SendMessageAsync<ResponseDataBase>(message, ApiActionType.SetMsgEmojiLike);
+    }
 }

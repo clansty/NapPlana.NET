@@ -760,7 +760,13 @@ public enum ApiActionType
     /// 发送合并转发消息。
     /// </summary>
     [JsonPropertyName("send_forward_msg")]
-    SendForwardMsg = 38
+    SendForwardMsg = 38,
+
+    /// <summary>
+    /// 贴表情
+    /// </summary>
+    [JsonPropertyName("set_msg_emoji_like")]
+    SetMsgEmojiLike = 39
 }
 
 /// <summary>
