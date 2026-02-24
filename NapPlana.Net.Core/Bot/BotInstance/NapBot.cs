@@ -182,4 +182,43 @@ public class NapBot: INapBot
         if (message is null) throw new ArgumentNullException(nameof(message));
         await SendMessageAsync<ResponseDataBase>(message, ApiActionType.SetMsgEmojiLike);
     }
+
+    /// <summary>
+    /// 获取文件信息
+    /// </summary>
+    /// <param name="request">请求参数</param>
+    /// <param name="timeoutSeconds">超时时间</param>
+    /// <returns>文件信息</returns>
+    public async Task<GetFileResponseData> GetFileAsync(GetFileRequest request, int timeoutSeconds = 15)
+    {
+        if (request is null) throw new ArgumentNullException(nameof(request));
+        var res = await SendMessageAsync<GetFileResponseData>(request, ApiActionType.GetFile, timeoutSeconds);
+        return res ?? throw new Exception("Failed to get file info.");
+    }
+
+    /// <summary>
+    /// 获取群文件下载链接
+    /// </summary>
+    /// <param name="request">请求参数</param>
+    /// <param name="timeoutSeconds">超时时间</param>
+    /// <returns>文件下载链接</returns>
+    public async Task<GetFileUrlResponseData> GetGroupFileUrlAsync(GetGroupFileUrlRequest request, int timeoutSeconds = 15)
+    {
+        if (request is null) throw new ArgumentNullException(nameof(request));
+        var res = await SendMessageAsync<GetFileUrlResponseData>(request, ApiActionType.GetGroupFileUrl, timeoutSeconds);
+        return res ?? throw new Exception("Failed to get group file url.");
+    }
+
+    /// <summary>
+    /// 获取私聊文件下载链接
+    /// </summary>
+    /// <param name="request">请求参数</param>
+    /// <param name="timeoutSeconds">超时时间</param>
+    /// <returns>文件下载链接</returns>
+    public async Task<GetFileUrlResponseData> GetPrivateFileUrlAsync(GetPrivateFileUrlRequest request, int timeoutSeconds = 15)
+    {
+        if (request is null) throw new ArgumentNullException(nameof(request));
+        var res = await SendMessageAsync<GetFileUrlResponseData>(request, ApiActionType.GetPrivateFileUrl, timeoutSeconds);
+        return res ?? throw new Exception("Failed to get private file url.");
+    }
 }
