@@ -50,6 +50,20 @@ public interface INapBot
     /// 发送私聊合并转发消息
     /// </summary>
     Task<ForwardMessageSendResponseData> SendPrivateForwardMessageAsync(PrivateForwardMessageSend message, int timeoutSeconds = 15);
+    
+    /// <summary>
+    /// 处理好友添加请求
+    /// </summary>
+    /// <param name="request">请求结构</param>
+    /// <returns>无</returns>
+    Task SetFriendAddRequestAsync(FriendAddRequestAction request);
+    
+    /// <summary>
+    /// 处理群添加请求
+    /// </summary>
+    /// <param name="request">请求结构</param>
+    /// <returns>无</returns>
+    Task SetGroupAddRequestAsync(GroupAddRequestAction request);
 
     /// <summary>
     /// 贴表情

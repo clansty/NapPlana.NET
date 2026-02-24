@@ -2,6 +2,7 @@ using NapPlana.Core.Data;
 using NapPlana.Core.Data.Event.Message;
 using NapPlana.Core.Data.Event.Meta;
 using NapPlana.Core.Data.Event.Notice;
+using NapPlana.Core.Data.Event.Request;
 
 namespace NapPlana.Core.Event.Handler;
 
@@ -421,6 +422,28 @@ public class EventHandler : IEventHandler
     public void ProfileLikeNoticeReceived(ProfileLikeNoticeEvent ev)
     {
         OnProfileLikeNoticeReceived?.Invoke(ev);
+    }
+    
+    #endregion
+    
+    #region 请求事件
+    
+    /// <inheritdoc />
+    public event Action<FriendRequestEvent>? OnFriendRequestReceived;
+    
+    /// <inheritdoc />
+    public void FriendRequestReceived(FriendRequestEvent ev)
+    {
+        OnFriendRequestReceived?.Invoke(ev);
+    }
+    
+    /// <inheritdoc />
+    public event Action<GroupRequestEvent>? OnGroupRequestReceived;
+    
+    /// <inheritdoc />
+    public void GroupRequestReceived(GroupRequestEvent ev)
+    {
+        OnGroupRequestReceived?.Invoke(ev);
     }
     
     #endregion
