@@ -4,6 +4,7 @@ using NapPlana.Core.Data.Event;
 using NapPlana.Core.Event.Handler;
 using NapPlana.Core.Event.Parser.Meta;
 using NapPlana.Core.Event.Parser.Notice;
+using NapPlana.Core.Event.Parser.Request;
 using NapPlana.Core.Exceptions;
 using NapPlana.Core.Event.Parser.Message;
 
@@ -53,6 +54,8 @@ public class RootEventParser(IEventHandler handler): IEventParser
                 break;
             case EventType.Request:
                 // 处理Request事件
+                var requestEventParser = new RequestEventParser(handler);
+                requestEventParser.ParseEvent(jsonEventData);
                 break;
         }
     }

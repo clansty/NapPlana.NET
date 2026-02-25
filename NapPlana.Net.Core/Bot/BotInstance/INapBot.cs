@@ -56,4 +56,32 @@ public interface INapBot
     /// </summary>
     /// <param name="message">消息结构</param>
     Task SetMsgEmojiLikeAsync(MsgEmojiLikeSend message);
+    /// <summary>
+    /// 获取文件信息
+    /// </summary>
+    Task<GetFileResponseData> GetFileAsync(GetFileRequest request, int timeoutSeconds = 15);
+    
+    /// <summary>
+    /// 获取群文件下载链接
+    /// </summary>
+    Task<GetFileUrlResponseData> GetGroupFileUrlAsync(GetGroupFileUrlRequest request, int timeoutSeconds = 15);
+    
+    /// <summary>
+    /// 获取私聊文件下载链接
+    /// </summary>
+    Task<GetFileUrlResponseData> GetPrivateFileUrlAsync(GetPrivateFileUrlRequest request, int timeoutSeconds = 15);
+    
+    /// <summary>
+    /// 处理好友添加请求
+    /// </summary>
+    /// <param name="request">请求结构</param>
+    /// <returns>无</returns>
+    Task SetFriendAddRequestAsync(FriendAddRequestAction request);
+    
+    /// <summary>
+    /// 处理群添加请求
+    /// </summary>
+    /// <param name="request">请求结构</param>
+    /// <returns>无</returns>
+    Task SetGroupAddRequestAsync(GroupAddRequestAction request);
 }

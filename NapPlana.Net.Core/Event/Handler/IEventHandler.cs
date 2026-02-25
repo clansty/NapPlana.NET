@@ -2,6 +2,7 @@ using NapPlana.Core.Data;
 using NapPlana.Core.Data.Event.Message;
 using NapPlana.Core.Data.Event.Meta;
 using NapPlana.Core.Data.Event.Notice;
+using NapPlana.Core.Data.Event.Request;
 
 namespace NapPlana.Core.Event.Handler;
 
@@ -461,6 +462,30 @@ public interface IEventHandler
     /// 触发点赞通知事件
     /// </summary>
     void ProfileLikeNoticeReceived(ProfileLikeNoticeEvent ev);
+    
+    #endregion
+    
+    #region 请求事件
+    
+    /// <summary>
+    /// 请求 - 好友添加
+    /// </summary>
+    event Action<FriendRequestEvent>? OnFriendRequestReceived;
+    
+    /// <summary>
+    /// 触发好友添加请求事件
+    /// </summary>
+    void FriendRequestReceived(FriendRequestEvent ev);
+    
+    /// <summary>
+    /// 请求 - 加群
+    /// </summary>
+    event Action<GroupRequestEvent>? OnGroupRequestReceived;
+    
+    /// <summary>
+    /// 触发加群请求事件
+    /// </summary>
+    void GroupRequestReceived(GroupRequestEvent ev);
     
     #endregion
 }

@@ -412,6 +412,29 @@ public enum NoticeType
 }
 
 /// <summary>
+/// 请求类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum RequestType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 好友请求。
+    /// </summary>
+    [JsonPropertyName("friend")]
+    Friend,
+    /// <summary>
+    /// 群请求。
+    /// </summary>
+    [JsonPropertyName("group")]
+    Group
+}
+
+/// <summary>
 /// 通知子类型。
 /// </summary>
 [JsonConverter(typeof(SafeJsonStringEnumConverter))]
@@ -767,6 +790,24 @@ public enum ApiActionType
     /// </summary>
     [JsonPropertyName("set_msg_emoji_like")]
     SetMsgEmojiLike = 39
+    
+    /// <summary>
+    /// 获取文件信息。
+    /// </summary>
+    [JsonPropertyName("get_file")]
+    GetFile = 40,
+    
+    /// <summary>
+    /// 获取群文件下载链接。
+    /// </summary>
+    [JsonPropertyName("get_group_file_url")]
+    GetGroupFileUrl = 41,
+    
+    /// <summary>
+    /// 获取私聊文件下载链接。
+    /// </summary>
+    [JsonPropertyName("get_private_file_url")]
+    GetPrivateFileUrl = 42
 }
 
 /// <summary>
