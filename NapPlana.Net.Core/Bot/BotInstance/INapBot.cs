@@ -50,6 +50,20 @@ public interface INapBot
     /// 发送私聊合并转发消息
     /// </summary>
     Task<ForwardMessageSendResponseData> SendPrivateForwardMessageAsync(PrivateForwardMessageSend message, int timeoutSeconds = 15);
+    /// <summary>
+    /// 获取文件信息
+    /// </summary>
+    Task<GetFileResponseData> GetFileAsync(GetFileRequest request, int timeoutSeconds = 15);
+    
+    /// <summary>
+    /// 获取群文件下载链接
+    /// </summary>
+    Task<GetFileUrlResponseData> GetGroupFileUrlAsync(GetGroupFileUrlRequest request, int timeoutSeconds = 15);
+    
+    /// <summary>
+    /// 获取私聊文件下载链接
+    /// </summary>
+    Task<GetFileUrlResponseData> GetPrivateFileUrlAsync(GetPrivateFileUrlRequest request, int timeoutSeconds = 15);
     
     /// <summary>
     /// 处理好友添加请求

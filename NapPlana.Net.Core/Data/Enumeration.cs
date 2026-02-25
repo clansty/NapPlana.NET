@@ -783,7 +783,25 @@ public enum ApiActionType
     /// 发送合并转发消息。
     /// </summary>
     [JsonPropertyName("send_forward_msg")]
-    SendForwardMsg = 38
+    SendForwardMsg = 38,
+    
+    /// <summary>
+    /// 获取文件信息。
+    /// </summary>
+    [JsonPropertyName("get_file")]
+    GetFile = 39,
+    
+    /// <summary>
+    /// 获取群文件下载链接。
+    /// </summary>
+    [JsonPropertyName("get_group_file_url")]
+    GetGroupFileUrl = 40,
+    
+    /// <summary>
+    /// 获取私聊文件下载链接。
+    /// </summary>
+    [JsonPropertyName("get_private_file_url")]
+    GetPrivateFileUrl = 41
 }
 
 /// <summary>
