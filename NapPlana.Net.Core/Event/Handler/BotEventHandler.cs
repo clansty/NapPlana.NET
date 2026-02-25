@@ -2,6 +2,7 @@
 using NapPlana.Core.Data.Event.Message;
 using NapPlana.Core.Data.Event.Meta;
 using NapPlana.Core.Data.Event.Notice;
+using NapPlana.Core.Data.Event.Request;
 
 namespace NapPlana.Core.Event.Handler;
 
@@ -763,6 +764,46 @@ public static class BotEventHandler
     public static void ProfileLikeNoticeReceived(ProfileLikeNoticeEvent ev)
     {
         _instance.ProfileLikeNoticeReceived(ev);
+    }
+
+    #endregion
+
+    #region 请求事件
+
+    /// <summary>
+    /// 请求 - 好友添加 (request.friend)
+    /// </summary>
+    public static event Action<FriendRequestEvent>? OnFriendRequestReceived
+    {
+        add => _instance.OnFriendRequestReceived += value;
+        remove => _instance.OnFriendRequestReceived -= value;
+    }
+
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
+    public static void FriendRequestReceived(FriendRequestEvent ev)
+    {
+        _instance.FriendRequestReceived(ev);
+    }
+
+    /// <summary>
+    /// 请求 - 加群 (request.group)
+    /// </summary>
+    public static event Action<GroupRequestEvent>? OnGroupRequestReceived
+    {
+        add => _instance.OnGroupRequestReceived += value;
+        remove => _instance.OnGroupRequestReceived -= value;
+    }
+
+    /// <summary>
+    /// 系统内部调用，程序集外请勿使用
+    /// </summary>
+    /// <param name="ev">事件参数</param>
+    public static void GroupRequestReceived(GroupRequestEvent ev)
+    {
+        _instance.GroupRequestReceived(ev);
     }
 
     #endregion
