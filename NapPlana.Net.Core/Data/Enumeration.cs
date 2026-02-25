@@ -412,6 +412,29 @@ public enum NoticeType
 }
 
 /// <summary>
+/// 请求类型。
+/// </summary>
+[JsonConverter(typeof(SafeJsonStringEnumConverter))]
+public enum RequestType
+{
+    /// <summary>
+    /// 无。
+    /// </summary>
+    [JsonPropertyName("none")]
+    None,
+    /// <summary>
+    /// 好友请求。
+    /// </summary>
+    [JsonPropertyName("friend")]
+    Friend,
+    /// <summary>
+    /// 群请求。
+    /// </summary>
+    [JsonPropertyName("group")]
+    Group
+}
+
+/// <summary>
 /// 通知子类型。
 /// </summary>
 [JsonConverter(typeof(SafeJsonStringEnumConverter))]
