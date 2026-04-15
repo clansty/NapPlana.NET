@@ -241,4 +241,30 @@ public class NapBot: INapBot
         var res = await SendMessageAsync<GetFileUrlResponseData>(request, ApiActionType.GetPrivateFileUrl, timeoutSeconds);
         return res ?? throw new Exception("Failed to get private file url.");
     }
+
+    /// <summary>
+    /// 上传群文件
+    /// </summary>
+    /// <param name="request">请求参数</param>
+    /// <param name="timeoutSeconds">超时时间</param>
+    /// <returns>上传结果</returns>
+    public async Task<UploadFileResponseData> UploadGroupFileAsync(UploadGroupFileRequest request, int timeoutSeconds = 300)
+    {
+        if (request is null) throw new ArgumentNullException(nameof(request));
+        var res = await SendMessageAsync<UploadFileResponseData>(request, ApiActionType.UploadGroupFile, timeoutSeconds);
+        return res ?? throw new Exception("Failed to upload group file.");
+    }
+
+    /// <summary>
+    /// 上传私聊文件
+    /// </summary>
+    /// <param name="request">请求参数</param>
+    /// <param name="timeoutSeconds">超时时间</param>
+    /// <returns>上传结果</returns>
+    public async Task<UploadFileResponseData> UploadPrivateFileAsync(UploadPrivateFileRequest request, int timeoutSeconds = 300)
+    {
+        if (request is null) throw new ArgumentNullException(nameof(request));
+        var res = await SendMessageAsync<UploadFileResponseData>(request, ApiActionType.UploadPrivateFile, timeoutSeconds);
+        return res ?? throw new Exception("Failed to upload private file.");
+    }
 }

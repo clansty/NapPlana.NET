@@ -84,4 +84,14 @@ public interface INapBot
     /// 获取私聊文件下载链接
     /// </summary>
     Task<GetFileUrlResponseData> GetPrivateFileUrlAsync(GetPrivateFileUrlRequest request, int timeoutSeconds = 15);
+    
+    /// <summary>
+    /// 上传群文件
+    /// </summary>
+    Task<UploadFileResponseData> UploadGroupFileAsync(UploadGroupFileRequest request, int timeoutSeconds = 300);
+    
+    /// <summary>
+    /// 上传私聊文件
+    /// </summary>
+    Task<UploadFileResponseData> UploadPrivateFileAsync(UploadPrivateFileRequest request, int timeoutSeconds = 300);
 }

@@ -97,3 +97,69 @@ public class GetFileUrlResponseData : ResponseDataBase
     [JsonPropertyName("url")]
     public string? Url { get; set; }
 }
+
+/// <summary>
+/// 上传群文件-请求
+/// </summary>
+public class UploadGroupFileRequest
+{
+    /// <summary>
+    /// 群号
+    /// </summary>
+    [JsonPropertyName("group_id")]
+    public long GroupId { get; set; }
+
+    /// <summary>
+    /// 本地路径、URL、file:// 协议路径、base64:// 或 data URI
+    /// </summary>
+    [JsonPropertyName("file")]
+    public string File { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 文件名
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 父目录ID
+    /// </summary>
+    [JsonPropertyName("folder")]
+    public string? Folder { get; set; }
+}
+
+/// <summary>
+/// 上传私聊文件-请求
+/// </summary>
+public class UploadPrivateFileRequest
+{
+    /// <summary>
+    /// 用户QQ号
+    /// </summary>
+    [JsonPropertyName("user_id")]
+    public long UserId { get; set; }
+
+    /// <summary>
+    /// 本地路径、URL、file:// 协议路径、base64:// 或 data URI
+    /// </summary>
+    [JsonPropertyName("file")]
+    public string File { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 文件名
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
+}
+
+/// <summary>
+/// 上传文件-响应（群聊/私聊通用）
+/// </summary>
+public class UploadFileResponseData : ResponseDataBase
+{
+    /// <summary>
+    /// 文件ID
+    /// </summary>
+    [JsonPropertyName("file_id")]
+    public string? FileId { get; set; }
+}

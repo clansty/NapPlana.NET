@@ -807,7 +807,19 @@ public enum ApiActionType
     /// 获取私聊文件下载链接。
     /// </summary>
     [JsonPropertyName("get_private_file_url")]
-    GetPrivateFileUrl = 42
+    GetPrivateFileUrl = 42,
+    
+    /// <summary>
+    /// 上传群文件。
+    /// </summary>
+    [JsonPropertyName("upload_group_file")]
+    UploadGroupFile = 43,
+    
+    /// <summary>
+    /// 上传私聊文件。
+    /// </summary>
+    [JsonPropertyName("upload_private_file")]
+    UploadPrivateFile = 44
 }
 
 /// <summary>
